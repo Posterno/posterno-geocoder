@@ -16,12 +16,13 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"PressmodoPluginScaffold\\": "includes/classes/"
-		}
+			"PNO\\Geocoder\\": "includes"
+		},
+		"files" : [
+			"geocoder.php"
+		]
 	},
 	"require-dev": {
-		"dealerdirect/phpcodesniffer-composer-installer": "0.4.4",
-		"pressmodo/phpcs-config": "dev-master"
 	},
 	"scripts": {
 		"lint": "phpcs .",
