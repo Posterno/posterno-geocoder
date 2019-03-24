@@ -48,7 +48,7 @@ function pno_hook_geocoder_into_admin_panel( $post_id, $container ) {
 
 	// Trigger geocoding only when coordinates change.
 	if ( $current_lat !== $updated_lat && $current_lng !== $updated_lng ) {
-		var_dump( $post_id );
+		print_r( PNO\Geocoder\Helper\Query::geocode_coordinates( $updated_lat, $updated_lng ) );
 	}
 	exit;
 

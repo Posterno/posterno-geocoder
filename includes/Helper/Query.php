@@ -9,6 +9,8 @@
 
 namespace PNO\Geocoder\Helper;
 
+use \yidas\googleMaps\Client as GMAP;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
@@ -17,23 +19,74 @@ defined( 'ABSPATH' ) || exit;
  */
 class Query {
 
-	public $active_provider = false;
+	/**
+	 * Detect the currently active map provider in Posterno.
+	 *
+	 * @return string
+	 */
+	private static function get_active_provider() {
 
-	public function __construct() {
+		$provider = pno_get_option( 'map_provider', 'googlemaps' );
 
-		$this->active_provider = $this->get_active_provider();
+		/**
+		 * Filter: modifier for the currently active geocoding provider.
+		 *
+		 * @param string $provider the name of the provider, must be an option within the maps provider setting of Posterno.
+		 * @return string.
+		 */
+		return apply_filters( 'pno_geocoder_active_provider', $provider );
+	}
+
+	/**
+	 * Retrieve the credentials configuration for the currently active geocoding provider.
+	 *
+	 * @return array|string
+	 */
+	private static function get_provider_credentials() {
+
+		$creds    = [];
+		$provider = self::get_active_provider();
+
+		switch ( $provider ) {
+			case 'googlemaps':
+				$creds = [
+					'key' => pno_get_option( 'google_maps_api_key' ),
+				];
+				break;
+		}
+
+		/**
+		 * Filter: allows to manually configure credentials for the currently active geocoding provider.
+		 *
+		 * @param array|string $creds the list of credentials.
+		 * @param string $provider name of the currently active provider.
+		 * @return array|string
+		 */
+		return apply_filters( 'pno_geocoder_provider_credentials', $creds, $provider );
 
 	}
 
-	private function get_active_provider() {
-		return pno_get_option( 'map_provider', 'googlemaps' );
-	}
+	/**
+	 * Geocode coordinates and retrieve address information.
+	 *
+	 * @param string $lat coordinate.
+	 * @param string $lng coordinate.
+	 * @return mixed
+	 */
+	public static function geocode_coordinates( $lat, $lng ) {
 
-	private function get_active_provider_classname() {
+		$geocoder_name = self::get_active_provider();
+		$credentials   = self::get_provider_credentials();
+		$response      = false;
 
-	}
+		switch ( $geocoder_name ) {
+			case 'googlemaps':
+				$provider = new GMAP( $credentials );
+				$response = $provider->reverseGeocode( [ $lat, $lng ] );
+				break;
+		}
 
-	public function geocode_coordinates( $lat, $lng ) {
+		return $response;
 
 	}
 
