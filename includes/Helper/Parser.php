@@ -9,8 +9,18 @@
 
 namespace PNO\Geocoder\Helper;
 
+/**
+ * Parses a response from a geocoding api and returns a nicely formatted array.
+ */
 class Parser {
 
+	/**
+	 * Parses a response from a geocoding api and returns a nicely formatted array.
+	 *
+	 * @param string $provider name of the provider being used.
+	 * @param array  $data response from the api.
+	 * @return mixed
+	 */
 	public static function parse( $provider, $data ) {
 
 		$formatted_data = false;
@@ -23,6 +33,12 @@ class Parser {
 
 	}
 
+	/**
+	 * Parse the Google's api response.
+	 *
+	 * @param array $data data to parse.
+	 * @return array
+	 */
 	private static function parse_googlemaps( $data ) {
 
 		$formatted_data = [];

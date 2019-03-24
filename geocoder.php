@@ -48,9 +48,13 @@ function pno_hook_geocoder_into_admin_panel( $post_id, $container ) {
 
 	// Trigger geocoding only when coordinates change.
 	if ( $current_lat !== $updated_lat && $current_lng !== $updated_lng ) {
-		print_r( PNO\Geocoder\Helper\Query::geocode_coordinates( $updated_lat, $updated_lng ) );
+
+		$response = PNO\Geocoder\Helper\Query::geocode_coordinates( $updated_lat, $updated_lng );
+
+		if ( ! empty( $response ) ) {
+			update_post_meta( $post_id, 'geocoded_data', $response );
+		}
 	}
-	exit;
 
 }
 add_action( 'carbon_fields_post_meta_container_saved', 'pno_hook_geocoder_into_admin_panel', 10, 2 );
