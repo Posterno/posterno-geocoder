@@ -83,6 +83,7 @@ class Query {
 			case 'googlemaps':
 				$provider = new GMAP( $credentials );
 				$response = $provider->reverseGeocode( [ $lat, $lng ] );
+				$response = Parser::parse( 'googlemaps', $response );
 				break;
 		}
 
