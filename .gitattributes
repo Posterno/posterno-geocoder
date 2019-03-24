@@ -13,6 +13,7 @@
 /composer.lock export-ignore
 /LICENSE export-ignore
 /phpcs.xml export-ignore
+/readme.md export-ignore
 
 * text eol=lf
 *.gif binary
