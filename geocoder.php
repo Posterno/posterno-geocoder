@@ -54,7 +54,6 @@ function pno_hook_geocoder_into_admin_panel( $post_id, $container ) {
 
 	// Trigger geocoding only when coordinates change.
 	if ( $current_lat !== $updated_lat && $current_lng !== $updated_lng ) {
-
 		$response = PNO\Geocoder\Helper\Query::geocode_coordinates( $updated_lat, $updated_lng );
 
 		if ( ! empty( $response ) ) {
@@ -64,3 +63,67 @@ function pno_hook_geocoder_into_admin_panel( $post_id, $container ) {
 
 }
 add_action( 'carbon_fields_post_meta_container_saved', 'pno_hook_geocoder_into_admin_panel', 10, 2 );
+
+/**
+ * Hook geocoding capabilities to the submission form.
+ *
+ * @param array  $values values submitted.
+ * @param string $listing_id the listing id.
+ * @param object $form the form object.
+ * @return void
+ */
+function pno_hook_geocoder_to_submission( $values, $listing_id, $form ) {
+
+	if ( ! pno_geocoder_is_enabled() ) {
+		return;
+	}
+
+	if ( isset( $values['listing_location'] ) && ! empty( $values['listing_location'] ) ) {
+		$location_details = json_decode( $values['listing_location'] );
+		if ( isset( $location_details->coordinates->lat ) ) {
+			$response = PNO\Geocoder\Helper\Query::geocode_coordinates( $location_details->coordinates->lat, $location_details->coordinates->lng );
+			if ( ! empty( $response ) ) {
+				update_post_meta( $listing_id, 'geocoded_data', $response );
+			}
+		}
+	}
+
+}
+add_action( 'pno_after_listing_submission', 'pno_hook_geocoder_to_submission', 10, 3 );
+
+/**
+ * Hook geocoding capabilities to the editing form.
+ *
+ * @param array  $values values submitted.
+ * @param string $listing_id the listing id.
+ * @param string $user_id the user editing the listing.
+ * @return void
+ */
+function pno_hook_geocoder_to_editing( $values, $listing_id, $user_id ) {
+
+	if ( ! pno_geocoder_is_enabled() ) {
+		return;
+	}
+
+	if ( isset( $values['listing_location'] ) && ! empty( $values['listing_location'] ) ) {
+		$location_details = json_decode( $values['listing_location'] );
+
+		$submitted_lat = sanitize_text_field( $location_details->coordinates->lat );
+		$submitted_lng = sanitize_text_field( $location_details->coordinates->lng );
+
+		$stored_coordinates = pno_get_listing_coordinates( $listing_id );
+
+		$stored_lat = isset( $stored_coordinates['lat'] ) ? $stored_coordinates['lat'] : false;
+		$stored_lng = isset( $stored_coordinates['lng'] ) ? $stored_coordinates['lng'] : false;
+
+		if ( $submitted_lat !== $stored_lat && $submitted_lng !== $stored_lng ) {
+			$response = PNO\Geocoder\Helper\Query::geocode_coordinates( $submitted_lat, $submitted_lng );
+			if ( ! empty( $response ) ) {
+				update_post_meta( $listing_id, 'geocoded_data', $response );
+			}
+		}
+
+	}
+
+}
+add_action( 'pno_after_listing_editing', 'pno_hook_geocoder_to_editing', 10, 3 );
