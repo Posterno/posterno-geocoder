@@ -18,6 +18,12 @@ defined( 'ABSPATH' ) || exit;
  */
 function pno_geocoder_is_enabled() {
 
+	$keys = PNO\Geocoder\Helper\Query::get_provider_credentials();
+
+	if ( ! $keys ) {
+		return;
+	}
+
 	/**
 	 * Filter: determine if the geocoder is enabled or disabled.
 	 *

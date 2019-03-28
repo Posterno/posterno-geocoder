@@ -42,16 +42,19 @@ class Query {
 	 *
 	 * @return array|string
 	 */
-	private static function get_provider_credentials() {
+	public static function get_provider_credentials() {
 
-		$creds    = [];
+		$creds    = false;
 		$provider = self::get_active_provider();
 
 		switch ( $provider ) {
 			case 'googlemaps':
-				$creds = [
-					'key' => pno_get_option( 'google_maps_api_key' ),
-				];
+				$key = pno_get_option( 'google_maps_api_key' );
+				if ( $key ) {
+					$creds = [
+						'key' => $key,
+					];
+				}
 				break;
 		}
 
