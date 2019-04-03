@@ -1,6 +1,6 @@
 # Posterno Geocoder
 
-![Plugin Version](https://img.shields.io/wordpress/plugin/v/posterno.svg?color=%235c6ac5&label=Latest%20release) ![Downloads](https://img.shields.io/wordpress/plugin/dm/posterno.svg?color=%2346b450&label=Downloads) ![Rating](https://img.shields.io/wordpress/plugin/rating/posterno.svg?color=%2346b450&label=Rating) ![tested](https://img.shields.io/wordpress/plugin/tested/posterno.svg?color=%2346b450&label=WordPress)
+![Plugin Version](https://img.shields.io/wordpress/plugin/v/posterno.svg?color=%235c6ac5&label=Latest%20release) ![Downloads](https://img.shields.io/wordpress/plugin/dt/posterno.svg?color=%2346b450&label=Downloads&style=popout) ![Rating](https://img.shields.io/wordpress/plugin/rating/posterno.svg?color=%2346b450&label=Rating) ![tested](https://img.shields.io/wordpress/plugin/tested/posterno.svg?color=%2346b450&label=WordPress)
 
 Posterno component that provides geocoding and reverse geocoding for the supported maps providers.
 
