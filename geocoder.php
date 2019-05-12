@@ -67,19 +67,18 @@ add_action( 'carbon_fields_post_meta_container_saved', 'pno_hook_geocoder_into_a
 /**
  * Hook geocoding capabilities to the submission form.
  *
- * @param array  $values values submitted.
- * @param string $listing_id the listing id.
  * @param object $form the form object.
+ * @param string $listing_id the listing id.
  * @return void
  */
-function pno_hook_geocoder_to_submission( $values, $listing_id, $form ) {
+function pno_hook_geocoder_to_submission( $form, $listing_id ) {
 
 	if ( ! pno_geocoder_is_enabled() ) {
 		return;
 	}
 
-	if ( isset( $values['listing_location'] ) && ! empty( $values['listing_location'] ) ) {
-		$location_details = json_decode( $values['listing_location'] );
+	if ( ! empty( $form->getFieldValue( 'listing_location' ) ) ) {
+		$location_details = json_decode( stripslashes( $form->getFieldValue( 'listing_location' ) ) );
 		if ( isset( $location_details->coordinates->lat ) ) {
 			$response = PNO\Geocoder\Helper\Query::geocode_coordinates( $location_details->coordinates->lat, $location_details->coordinates->lng );
 			if ( ! empty( $response ) ) {
@@ -89,24 +88,24 @@ function pno_hook_geocoder_to_submission( $values, $listing_id, $form ) {
 	}
 
 }
-add_action( 'pno_after_listing_submission', 'pno_hook_geocoder_to_submission', 10, 3 );
+add_action( 'pno_after_listing_submission', 'pno_hook_geocoder_to_submission', 10, 2 );
 
 /**
  * Hook geocoding capabilities to the editing form.
  *
- * @param array  $values values submitted.
+ * @param object $form form instance.
  * @param string $listing_id the listing id.
  * @param string $user_id the user editing the listing.
  * @return void
  */
-function pno_hook_geocoder_to_editing( $values, $listing_id, $user_id ) {
+function pno_hook_geocoder_to_editing( $form, $listing_id, $user_id ) {
 
 	if ( ! pno_geocoder_is_enabled() ) {
 		return;
 	}
 
-	if ( isset( $values['listing_location'] ) && ! empty( $values['listing_location'] ) ) {
-		$location_details = json_decode( $values['listing_location'] );
+	if ( ! empty( $form->getFieldValue( 'listing_location' ) ) ) {
+		$location_details = json_decode( stripslashes( $form->getFieldValue( 'listing_location' ) ) );
 
 		$submitted_lat = sanitize_text_field( $location_details->coordinates->lat );
 		$submitted_lng = sanitize_text_field( $location_details->coordinates->lng );
@@ -122,8 +121,7 @@ function pno_hook_geocoder_to_editing( $values, $listing_id, $user_id ) {
 				update_post_meta( $listing_id, 'geocoded_data', $response );
 			}
 		}
-
 	}
 
 }
-add_action( 'pno_after_listing_editing', 'pno_hook_geocoder_to_editing', 10, 3 );
+add_action( 'pno_after_listing_editing', 'pno_hook_geocoder_to_editing', 10, 2 );
