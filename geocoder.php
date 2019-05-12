@@ -124,4 +124,4 @@ function pno_hook_geocoder_to_editing( $form, $listing_id, $user_id ) {
 	}
 
 }
-add_action( 'pno_after_listing_editing', 'pno_hook_geocoder_to_editing', 10, 2 );
+add_action( 'pno_after_listing_editing', 'pno_hook_geocoder_to_editing', 10, 3 );
