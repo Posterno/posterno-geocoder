@@ -82,6 +82,10 @@ class Query {
 		$credentials   = self::get_provider_credentials();
 		$response      = false;
 
+		if ( ! $geocoder_name || ! $credentials ) {
+			return;
+		}
+
 		switch ( $geocoder_name ) {
 			case 'googlemaps':
 				$provider = new GMAP( $credentials );
