@@ -113,3 +113,8 @@ npm-debug.log
 yarn-error.log
 
 .vscode
+
+dependencies/vendor/*
+!dependencies/vendor/.gitkeep
+vendor-bin
+bin
