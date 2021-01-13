@@ -1,8 +1,8 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Trait implementing functionality common to requests and responses.
  */
@@ -14,7 +14,7 @@ trait MessageTrait
     private $headerNames = [];
     /** @var string */
     private $protocol = '1.1';
-    /** @var StreamInterface */
+    /** @var StreamInterface|null */
     private $stream;
     public function getProtocolVersion()
     {
@@ -92,11 +92,11 @@ trait MessageTrait
     public function getBody()
     {
         if (!$this->stream) {
-            $this->stream = stream_for('');
+            $this->stream = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor('');
         }
         return $this->stream;
     }
-    public function withBody(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $body)
+    public function withBody(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $body)
     {
         if ($body === $this->stream) {
             return $this;
@@ -157,7 +157,7 @@ trait MessageTrait
                 throw new \InvalidArgumentException(\sprintf('Header value must be scalar or null but %s provided.', \is_object($value) ? \get_class($value) : \gettype($value)));
             }
             return \trim((string) $value, " \t");
-        }, $values);
+        }, \array_values($values));
     }
     private function assertHeader($header)
     {

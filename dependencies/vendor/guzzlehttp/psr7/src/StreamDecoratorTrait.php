@@ -1,8 +1,8 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Stream decorator trait
  * @property StreamInterface stream
@@ -12,7 +12,7 @@ trait StreamDecoratorTrait
     /**
      * @param StreamInterface $stream Stream to decorate
      */
-    public function __construct(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
+    public function __construct(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
     {
         $this->stream = $stream;
     }
@@ -47,7 +47,7 @@ trait StreamDecoratorTrait
     }
     public function getContents()
     {
-        return copy_to_string($this);
+        return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::copyToString($this);
     }
     /**
      * Allow decorators to implement custom methods
@@ -119,6 +119,7 @@ trait StreamDecoratorTrait
      * Implement in subclasses to dynamically create streams when requested.
      *
      * @return StreamInterface
+     *
      * @throws \BadMethodCallException
      */
     protected function createStream()

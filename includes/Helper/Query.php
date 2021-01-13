@@ -9,7 +9,7 @@
 
 namespace PNO\Geocoder\Helper;
 
-use \yidas\googleMaps\Client as GMAP;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Client as GMAP;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;

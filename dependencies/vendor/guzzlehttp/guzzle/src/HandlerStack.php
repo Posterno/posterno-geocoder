@@ -1,10 +1,10 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp;
 
-use PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
 /**
  * Creates a composed Guzzle handler function by stacking middlewares on top of
  * an HTTP handler function.
@@ -37,10 +37,10 @@ class HandlerStack
     public static function create(callable $handler = null)
     {
         $stack = new self($handler ?: choose_handler());
-        $stack->push(\PNO\Geocoder\Vendor\GuzzleHttp\Middleware::httpErrors(), 'http_errors');
-        $stack->push(\PNO\Geocoder\Vendor\GuzzleHttp\Middleware::redirect(), 'allow_redirects');
-        $stack->push(\PNO\Geocoder\Vendor\GuzzleHttp\Middleware::cookies(), 'cookies');
-        $stack->push(\PNO\Geocoder\Vendor\GuzzleHttp\Middleware::prepareBody(), 'prepare_body');
+        $stack->push(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Middleware::httpErrors(), 'http_errors');
+        $stack->push(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Middleware::redirect(), 'allow_redirects');
+        $stack->push(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Middleware::cookies(), 'cookies');
+        $stack->push(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Middleware::prepareBody(), 'prepare_body');
         return $stack;
     }
     /**
@@ -58,7 +58,7 @@ class HandlerStack
      *
      * @return ResponseInterface|PromiseInterface
      */
-    public function __invoke(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
+    public function __invoke(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
     {
         $handler = $this->resolve();
         return $handler($request, $options);

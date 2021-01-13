@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp;
 
 /**
  * This class contains a list of built-in Guzzle request options.

@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Exception;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception;
 
 use Throwable;
 if (\interface_exists(\Throwable::class)) {

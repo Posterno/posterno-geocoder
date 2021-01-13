@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 /**
  * A special exception that is thrown when waiting on a rejected promise.
@@ -12,7 +12,7 @@ class RejectionException extends \RuntimeException
     /** @var mixed Rejection reason. */
     private $reason;
     /**
-     * @param mixed $reason       Rejection reason.
+     * @param mixed  $reason      Rejection reason.
      * @param string $description Optional description
      */
     public function __construct($reason, $description = null)

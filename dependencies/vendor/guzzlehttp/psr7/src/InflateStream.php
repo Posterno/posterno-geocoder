@@ -1,8 +1,8 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Uses PHP's zlib.inflate filter to inflate deflate or gzipped content.
  *
@@ -14,26 +14,26 @@ use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
  * @link http://tools.ietf.org/html/rfc1952
  * @link http://php.net/manual/en/filters.compression.php
  */
-class InflateStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
+class InflateStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
 {
     use StreamDecoratorTrait;
-    public function __construct(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
+    public function __construct(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
     {
         // read the first 10 bytes, ie. gzip header
         $header = $stream->read(10);
         $filenameHeaderLength = $this->getLengthOfPossibleFilenameHeader($stream, $header);
         // Skip the header, that is 10 + length of filename + 1 (nil) bytes
-        $stream = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LimitStream($stream, -1, 10 + $filenameHeaderLength);
-        $resource = \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\StreamWrapper::getResource($stream);
+        $stream = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LimitStream($stream, -1, 10 + $filenameHeaderLength);
+        $resource = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\StreamWrapper::getResource($stream);
         \stream_filter_append($resource, 'zlib.inflate', \STREAM_FILTER_READ);
-        $this->stream = $stream->isSeekable() ? new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($resource) : new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\NoSeekStream(new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($resource));
+        $this->stream = $stream->isSeekable() ? new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($resource) : new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\NoSeekStream(new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($resource));
     }
     /**
      * @param StreamInterface $stream
      * @param $header
      * @return int
      */
-    private function getLengthOfPossibleFilenameHeader(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $header)
+    private function getLengthOfPossibleFilenameHeader(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $header)
     {
         $filename_header_length = 0;
         if (\substr(\bin2hex($header), 6, 2) === '08') {

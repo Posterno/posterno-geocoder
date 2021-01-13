@@ -1,14 +1,14 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * PHP stream implementation.
  *
  * @var $stream
  */
-class Stream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
+class Stream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
 {
     /**
      * Resource modes.
@@ -67,8 +67,10 @@ class Stream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
     public function __toString()
     {
         try {
-            $this->seek(0);
-            return (string) \stream_get_contents($this->stream);
+            if ($this->isSeekable()) {
+                $this->seek(0);
+            }
+            return $this->getContents();
         } catch (\Exception $e) {
             return '';
         }

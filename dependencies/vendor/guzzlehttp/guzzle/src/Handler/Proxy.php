@@ -1,9 +1,9 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Handler;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler;
 
-use PNO\Geocoder\Vendor\GuzzleHttp\RequestOptions;
-use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\RequestOptions;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * Provides basic proxies for handlers.
  */
@@ -20,8 +20,8 @@ class Proxy
      */
     public static function wrapSync(callable $default, callable $sync)
     {
-        return function (\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options) use($default, $sync) {
-            return empty($options[\PNO\Geocoder\Vendor\GuzzleHttp\RequestOptions::SYNCHRONOUS]) ? $default($request, $options) : $sync($request, $options);
+        return function (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options) use($default, $sync) {
+            return empty($options[\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\RequestOptions::SYNCHRONOUS]) ? $default($request, $options) : $sync($request, $options);
         };
     }
     /**
@@ -39,7 +39,7 @@ class Proxy
      */
     public static function wrapStreaming(callable $default, callable $streaming)
     {
-        return function (\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options) use($default, $streaming) {
+        return function (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options) use($default, $streaming) {
             return empty($options['stream']) ? $default($request, $options) : $streaming($request, $options);
         };
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp;
 
-use PNO\Geocoder\Vendor\GuzzleHttp\Promise\EachPromise;
-use PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface;
-use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\EachPromise;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * Sends an iterator of requests concurrently using a capped pool size.
  *
@@ -17,7 +17,7 @@ use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
  * "request_options" array that should be merged on top of any existing
  * options, and the function MUST then return a wait-able promise.
  */
-class Pool implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface
+class Pool implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface
 {
     /** @var EachPromise */
     private $each;
@@ -31,7 +31,7 @@ class Pool implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface
      *     - fulfilled: (callable) Function to invoke when a request completes.
      *     - rejected: (callable) Function to invoke when a request is rejected.
      */
-    public function __construct(\PNO\Geocoder\Vendor\GuzzleHttp\ClientInterface $client, $requests, array $config = [])
+    public function __construct(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\ClientInterface $client, $requests, array $config = [])
     {
         // Backwards compatibility.
         if (isset($config['pool_size'])) {
@@ -48,7 +48,7 @@ class Pool implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface
         $iterable = \PNO\Geocoder\Vendor\GuzzleHttp\Promise\iter_for($requests);
         $requests = function () use($iterable, $client, $opts) {
             foreach ($iterable as $key => $rfn) {
-                if ($rfn instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface) {
+                if ($rfn instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface) {
                     (yield $key => $client->sendAsync($rfn, $opts));
                 } elseif (\is_callable($rfn)) {
                     (yield $key => $rfn($opts));
@@ -57,7 +57,7 @@ class Pool implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface
                 }
             }
         };
-        $this->each = new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\EachPromise($requests(), $config);
+        $this->each = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\EachPromise($requests(), $config);
     }
     /**
      * Get promise
@@ -85,7 +85,7 @@ class Pool implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface
      *               in the same order that the requests were sent.
      * @throws \InvalidArgumentException if the event format is incorrect.
      */
-    public static function batch(\PNO\Geocoder\Vendor\GuzzleHttp\ClientInterface $client, $requests, array $options = [])
+    public static function batch(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\ClientInterface $client, $requests, array $options = [])
     {
         $res = [];
         self::cmpCallback($options, 'fulfilled', $res);

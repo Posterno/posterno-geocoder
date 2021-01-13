@@ -1,13 +1,13 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp;
 
-use PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInterface;
-use PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException;
-use PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectedPromise;
-use PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
-use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
-use PNO\Geocoder\Vendor\Psr\Log\LoggerInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectedPromise;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Log\LoggerInterface;
 /**
  * Functions used to create and wrap handlers with handler middleware.
  */
@@ -27,7 +27,7 @@ final class Middleware
             return function ($request, array $options) use($handler) {
                 if (empty($options['cookies'])) {
                     return $handler($request, $options);
-                } elseif (!$options['cookies'] instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInterface) {
+                } elseif (!$options['cookies'] instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInterface) {
                     throw new \InvalidArgumentException('PNO\\Geocoder\\Vendor\\cookies must be an instance of GuzzleHttp\\Cookie\\CookieJarInterface');
                 }
                 $cookieJar = $options['cookies'];
@@ -52,12 +52,12 @@ final class Middleware
                 if (empty($options['http_errors'])) {
                     return $handler($request, $options);
                 }
-                return $handler($request, $options)->then(function (\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response) use($request) {
+                return $handler($request, $options)->then(function (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response) use($request) {
                     $code = $response->getStatusCode();
                     if ($code < 400) {
                         return $response;
                     }
-                    throw \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException::create($request, $response);
+                    throw \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException::create($request, $response);
                 });
             };
         };
@@ -123,7 +123,7 @@ final class Middleware
     public static function redirect()
     {
         return function (callable $handler) {
-            return new \PNO\Geocoder\Vendor\GuzzleHttp\RedirectMiddleware($handler);
+            return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\RedirectMiddleware($handler);
         };
     }
     /**
@@ -144,7 +144,7 @@ final class Middleware
     public static function retry(callable $decider, callable $delay = null)
     {
         return function (callable $handler) use($decider, $delay) {
-            return new \PNO\Geocoder\Vendor\GuzzleHttp\RetryMiddleware($decider, $handler, $delay);
+            return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\RetryMiddleware($decider, $handler, $delay);
         };
     }
     /**
@@ -157,7 +157,7 @@ final class Middleware
      *
      * @return callable Returns a function that accepts the next handler.
      */
-    public static function log(\PNO\Geocoder\Vendor\Psr\Log\LoggerInterface $logger, \PNO\Geocoder\Vendor\GuzzleHttp\MessageFormatter $formatter, $logLevel = 'info')
+    public static function log(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Log\LoggerInterface $logger, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\MessageFormatter $formatter, $logLevel = 'info')
     {
         return function (callable $handler) use($logger, $formatter, $logLevel) {
             return function ($request, array $options) use($handler, $logger, $formatter, $logLevel) {
@@ -166,7 +166,7 @@ final class Middleware
                     $logger->log($logLevel, $message);
                     return $response;
                 }, function ($reason) use($logger, $request, $formatter) {
-                    $response = $reason instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException ? $reason->getResponse() : null;
+                    $response = $reason instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException ? $reason->getResponse() : null;
                     $message = $formatter->format($request, $response, $reason);
                     $logger->notice($message);
                     return \PNO\Geocoder\Vendor\GuzzleHttp\Promise\rejection_for($reason);
@@ -183,7 +183,7 @@ final class Middleware
     public static function prepareBody()
     {
         return function (callable $handler) {
-            return new \PNO\Geocoder\Vendor\GuzzleHttp\PrepareBodyMiddleware($handler);
+            return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\PrepareBodyMiddleware($handler);
         };
     }
     /**

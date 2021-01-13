@@ -1,12 +1,12 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
 use InvalidArgumentException;
-use PNO\Geocoder\Vendor\Psr\Http\Message\ServerRequestInterface;
-use PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
-use PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFileInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ServerRequestInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFileInterface;
 /**
  * Server-side HTTP request
  *
@@ -21,7 +21,7 @@ use PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFileInterface;
  * implemented such that they retain the internal state of the current
  * message and return a new instance that contains the changed state.
  */
-class ServerRequest extends \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request implements \PNO\Geocoder\Vendor\Psr\Http\Message\ServerRequestInterface
+class ServerRequest extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ServerRequestInterface
 {
     /**
      * @var array
@@ -64,14 +64,16 @@ class ServerRequest extends \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request impleme
      * Return an UploadedFile instance array.
      *
      * @param array $files A array which respect $_FILES structure
-     * @throws InvalidArgumentException for unrecognized values
+     *
      * @return array
+     *
+     * @throws InvalidArgumentException for unrecognized values
      */
     public static function normalizeFiles(array $files)
     {
         $normalized = [];
         foreach ($files as $key => $value) {
-            if ($value instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFileInterface) {
+            if ($value instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFileInterface) {
                 $normalized[$key] = $value;
             } elseif (\is_array($value) && isset($value['tmp_name'])) {
                 $normalized[$key] = self::createUploadedFileFromSpec($value);
@@ -98,7 +100,7 @@ class ServerRequest extends \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request impleme
         if (\is_array($value['tmp_name'])) {
             return self::normalizeNestedFileSpec($value);
         }
-        return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UploadedFile($value['tmp_name'], (int) $value['size'], (int) $value['error'], $value['name'], $value['type']);
+        return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UploadedFile($value['tmp_name'], (int) $value['size'], (int) $value['error'], $value['name'], $value['type']);
     }
     /**
      * Normalize an array of file specifications.
@@ -133,9 +135,9 @@ class ServerRequest extends \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request impleme
         $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
         $headers = \getallheaders();
         $uri = self::getUriFromGlobals();
-        $body = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\CachingStream(new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream('php://input', 'r+'));
+        $body = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\CachingStream(new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream('php://input', 'r+'));
         $protocol = isset($_SERVER['SERVER_PROTOCOL']) ? \str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1';
-        $serverRequest = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\ServerRequest($method, $uri, $headers, $body, $protocol, $_SERVER);
+        $serverRequest = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\ServerRequest($method, $uri, $headers, $body, $protocol, $_SERVER);
         return $serverRequest->withCookieParams($_COOKIE)->withQueryParams($_GET)->withParsedBody($_POST)->withUploadedFiles(self::normalizeFiles($_FILES));
     }
     private static function extractHostAndPortFromAuthority($authority)
@@ -156,7 +158,7 @@ class ServerRequest extends \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request impleme
      */
     public static function getUriFromGlobals()
     {
-        $uri = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Uri('');
+        $uri = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Uri('');
         $uri = $uri->withScheme(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http');
         $hasPort = \false;
         if (isset($_SERVER['HTTP_HOST'])) {

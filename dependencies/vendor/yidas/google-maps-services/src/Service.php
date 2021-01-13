@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\yidas\googleMaps;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps;
 
 /**
  * Google Maps Abstract Service
@@ -25,7 +25,7 @@ abstract class Service
      * @param string $method HTTP request method
      * @return array|mixed Formated result
      */
-    protected static function requestHandler(\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $apiPath, $params, $method = 'GET')
+    protected static function requestHandler(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $apiPath, $params, $method = 'GET')
     {
         $response = $client->request($apiPath, $params, $method);
         $result = $response->getBody()->getContents();

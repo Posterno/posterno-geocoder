@@ -1,12 +1,12 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
 use InvalidArgumentException;
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
-use PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFileInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFileInterface;
 use RuntimeException;
-class UploadedFile implements \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFileInterface
+class UploadedFile implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFileInterface
 {
     /**
      * @var int[]
@@ -61,6 +61,7 @@ class UploadedFile implements \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFile
      * Depending on the value set file or stream variable
      *
      * @param mixed $streamOrFile
+     *
      * @throws InvalidArgumentException
      */
     private function setStreamOrFile($streamOrFile)
@@ -68,8 +69,8 @@ class UploadedFile implements \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFile
         if (\is_string($streamOrFile)) {
             $this->file = $streamOrFile;
         } elseif (\is_resource($streamOrFile)) {
-            $this->stream = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($streamOrFile);
-        } elseif ($streamOrFile instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface) {
+            $this->stream = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($streamOrFile);
+        } elseif ($streamOrFile instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface) {
             $this->stream = $streamOrFile;
         } else {
             throw new \InvalidArgumentException('Invalid stream or file provided for UploadedFile');
@@ -77,6 +78,7 @@ class UploadedFile implements \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFile
     }
     /**
      * @param int $error
+     *
      * @throws InvalidArgumentException
      */
     private function setError($error)
@@ -84,13 +86,14 @@ class UploadedFile implements \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFile
         if (\false === \is_int($error)) {
             throw new \InvalidArgumentException('Upload file error status must be an integer');
         }
-        if (\false === \in_array($error, \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UploadedFile::$errors)) {
+        if (\false === \in_array($error, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UploadedFile::$errors)) {
             throw new \InvalidArgumentException('Invalid error status for UploadedFile');
         }
         $this->error = $error;
     }
     /**
      * @param int $size
+     *
      * @throws InvalidArgumentException
      */
     private function setSize($size)
@@ -118,6 +121,7 @@ class UploadedFile implements \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFile
     }
     /**
      * @param string|null $clientFilename
+     *
      * @throws InvalidArgumentException
      */
     private function setClientFilename($clientFilename)
@@ -129,6 +133,7 @@ class UploadedFile implements \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFile
     }
     /**
      * @param string|null $clientMediaType
+     *
      * @throws InvalidArgumentException
      */
     private function setClientMediaType($clientMediaType)
@@ -168,22 +173,25 @@ class UploadedFile implements \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFile
     }
     /**
      * {@inheritdoc}
+     *
      * @throws RuntimeException if the upload was not successful.
      */
     public function getStream()
     {
         $this->validateActive();
-        if ($this->stream instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface) {
+        if ($this->stream instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface) {
             return $this->stream;
         }
-        return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream($this->file, 'r+');
+        return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream($this->file, 'r+');
     }
     /**
      * {@inheritdoc}
      *
      * @see http://php.net/is_uploaded_file
      * @see http://php.net/move_uploaded_file
+     *
      * @param string $targetPath Path to which to move the uploaded file.
+     *
      * @throws RuntimeException if the upload was not successful.
      * @throws InvalidArgumentException if the $path specified is invalid.
      * @throws RuntimeException on any error during the move operation, or on
@@ -198,7 +206,7 @@ class UploadedFile implements \PNO\Geocoder\Vendor\Psr\Http\Message\UploadedFile
         if ($this->file) {
             $this->moved = \php_sapi_name() == 'cli' ? \rename($this->file, $targetPath) : \move_uploaded_file($this->file, $targetPath);
         } else {
-            copy_to_stream($this->getStream(), new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream($targetPath, 'w'));
+            \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::copyToStream($this->getStream(), new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream($targetPath, 'w'));
             $this->moved = \true;
         }
         if (\false === $this->moved) {

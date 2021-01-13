@@ -1,18 +1,18 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Handler;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler;
 
-use PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException;
-use PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException;
-use PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise;
-use PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
-use PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream;
-use PNO\Geocoder\Vendor\GuzzleHttp\TransferStats;
-use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\TransferStats;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * Creates curl resources from a request
  */
-class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactoryInterface
+class CurlFactory implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactoryInterface
 {
     const CURL_VERSION_STR = 'curl_version';
     const LOW_CURL_VERSION_NUMBER = '7.21.2';
@@ -27,13 +27,13 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
     {
         $this->maxHandles = $maxHandles;
     }
-    public function create(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
+    public function create(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
     {
         if (isset($options['curl']['body_as_string'])) {
             $options['_body_as_string'] = $options['curl']['body_as_string'];
             unset($options['curl']['body_as_string']);
         }
-        $easy = new \PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle();
+        $easy = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle();
         $easy->request = $request;
         $easy->options = $options;
         $conf = $this->getDefaultConf($easy);
@@ -50,7 +50,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
         \curl_setopt_array($easy->handle, $conf);
         return $easy;
     }
-    public function release(\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy)
+    public function release(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy)
     {
         $resource = $easy->handle;
         unset($easy->handle);
@@ -79,7 +79,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
      *
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public static function finish(callable $handler, \PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactoryInterface $factory)
+    public static function finish(callable $handler, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactoryInterface $factory)
     {
         if (isset($easy->options['on_stats'])) {
             self::invokeStats($easy);
@@ -94,16 +94,16 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
         if ($body->isSeekable()) {
             $body->rewind();
         }
-        return new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise($easy->response);
+        return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise($easy->response);
     }
-    private static function invokeStats(\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy)
+    private static function invokeStats(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy)
     {
         $curlStats = \curl_getinfo($easy->handle);
         $curlStats['appconnect_time'] = \curl_getinfo($easy->handle, \CURLINFO_APPCONNECT_TIME);
-        $stats = new \PNO\Geocoder\Vendor\GuzzleHttp\TransferStats($easy->request, $easy->response, $curlStats['total_time'], $easy->errno, $curlStats);
+        $stats = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\TransferStats($easy->request, $easy->response, $curlStats['total_time'], $easy->errno, $curlStats);
         \call_user_func($easy->options['on_stats'], $stats);
     }
-    private static function finishError(callable $handler, \PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactoryInterface $factory)
+    private static function finishError(callable $handler, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactoryInterface $factory)
     {
         // Get error information and release the handle to the factory.
         $ctx = ['errno' => $easy->errno, 'error' => \curl_error($easy->handle), 'appconnect_time' => \curl_getinfo($easy->handle, \CURLINFO_APPCONNECT_TIME)] + \curl_getinfo($easy->handle);
@@ -115,13 +115,13 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
         }
         return self::createRejection($easy, $ctx);
     }
-    private static function createRejection(\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array $ctx)
+    private static function createRejection(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array $ctx)
     {
         static $connectionErrors = [\CURLE_OPERATION_TIMEOUTED => \true, \CURLE_COULDNT_RESOLVE_HOST => \true, \CURLE_COULDNT_CONNECT => \true, \CURLE_SSL_CONNECT_ERROR => \true, \CURLE_GOT_NOTHING => \true];
         // If an exception was encountered during the onHeaders event, then
         // return a rejected promise that wraps that exception.
         if ($easy->onHeadersException) {
-            return \PNO\Geocoder\Vendor\GuzzleHttp\Promise\rejection_for(new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException('An error was encountered during the on_headers event', $easy->request, $easy->response, $easy->onHeadersException, $ctx));
+            return \PNO\Geocoder\Vendor\GuzzleHttp\Promise\rejection_for(new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException('An error was encountered during the on_headers event', $easy->request, $easy->response, $easy->onHeadersException, $ctx));
         }
         if (\version_compare($ctx[self::CURL_VERSION_STR], self::LOW_CURL_VERSION_NUMBER)) {
             $message = \sprintf('cURL error %s: %s (%s)', $ctx['errno'], $ctx['error'], 'see https://curl.haxx.se/libcurl/c/libcurl-errors.html');
@@ -129,10 +129,10 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
             $message = \sprintf('cURL error %s: %s (%s) for %s', $ctx['errno'], $ctx['error'], 'see https://curl.haxx.se/libcurl/c/libcurl-errors.html', $easy->request->getUri());
         }
         // Create a connection exception if it was a specific error code.
-        $error = isset($connectionErrors[$easy->errno]) ? new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException($message, $easy->request, null, $ctx) : new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException($message, $easy->request, $easy->response, null, $ctx);
+        $error = isset($connectionErrors[$easy->errno]) ? new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException($message, $easy->request, null, $ctx) : new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException($message, $easy->request, $easy->response, null, $ctx);
         return \PNO\Geocoder\Vendor\GuzzleHttp\Promise\rejection_for($error);
     }
-    private function getDefaultConf(\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy)
+    private function getDefaultConf(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy)
     {
         $conf = ['_headers' => $easy->request->getHeaders(), \CURLOPT_CUSTOMREQUEST => $easy->request->getMethod(), \CURLOPT_URL => (string) $easy->request->getUri()->withFragment(''), \CURLOPT_RETURNTRANSFER => \false, \CURLOPT_HEADER => \false, \CURLOPT_CONNECTTIMEOUT => 150];
         if (\defined('CURLOPT_PROTOCOLS')) {
@@ -148,7 +148,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
         }
         return $conf;
     }
-    private function applyMethod(\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array &$conf)
+    private function applyMethod(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array &$conf)
     {
         $body = $easy->request->getBody();
         $size = $body->getSize();
@@ -167,7 +167,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
             unset($conf[\CURLOPT_WRITEFUNCTION], $conf[\CURLOPT_READFUNCTION], $conf[\CURLOPT_FILE], $conf[\CURLOPT_INFILE]);
         }
     }
-    private function applyBody(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options, array &$conf)
+    private function applyBody(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options, array &$conf)
     {
         $size = $request->hasHeader('Content-Length') ? (int) $request->getHeaderLine('Content-Length') : null;
         // Send the body as a string if the size is less than 1MB OR if the
@@ -200,7 +200,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
             $conf[\CURLOPT_HTTPHEADER][] = 'Content-Type:';
         }
     }
-    private function applyHeaders(\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array &$conf)
+    private function applyHeaders(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array &$conf)
     {
         foreach ($conf['_headers'] as $name => $values) {
             foreach ($values as $value) {
@@ -234,7 +234,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
             }
         }
     }
-    private function applyHandlerOptions(\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array &$conf)
+    private function applyHandlerOptions(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array &$conf)
     {
         $options = $easy->options;
         if (isset($options['verify'])) {
@@ -278,7 +278,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
                 // Ensure that the directory exists before failing in curl.
                 throw new \RuntimeException(\sprintf('Directory %s does not exist for sink value of %s', \dirname($sink), $sink));
             } else {
-                $sink = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream($sink, 'w+');
+                $sink = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream($sink, 'w+');
             }
             $easy->sink = $sink;
             $conf[\CURLOPT_WRITEFUNCTION] = function ($ch, $write) use($sink) {
@@ -287,7 +287,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
         } else {
             // Use a default temp stream if no sink was set.
             $conf[\CURLOPT_FILE] = \fopen('php://temp', 'w+');
-            $easy->sink = \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\stream_for($conf[\CURLOPT_FILE]);
+            $easy->sink = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\stream_for($conf[\CURLOPT_FILE]);
         }
         $timeoutRequiresNoSignal = \false;
         if (isset($options['timeout'])) {
@@ -376,7 +376,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
      * error, causing the request to be sent through curl_multi_info_read()
      * without an error status.
      */
-    private static function retryFailedRewind(callable $handler, \PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array $ctx)
+    private static function retryFailedRewind(callable $handler, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy, array $ctx)
     {
         try {
             // Only rewind if the body has been read from.
@@ -399,7 +399,7 @@ class CurlFactory implements \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory
         }
         return $handler($easy->request, $easy->options);
     }
-    private function createHeaderFn(\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy)
+    private function createHeaderFn(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy)
     {
         if (isset($easy->options['on_headers'])) {
             $onHeaders = $easy->options['on_headers'];

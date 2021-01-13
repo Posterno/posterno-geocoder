@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Cookie;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie;
 
 /**
  * Set-Cookie object

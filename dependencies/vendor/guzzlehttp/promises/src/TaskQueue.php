@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 /**
  * A task queue that executes tasks in a FIFO order.
@@ -9,9 +9,9 @@ namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
  * maintains a constant stack size. You can use the task queue asynchronously
  * by calling the `run()` function of the global task queue in an event loop.
  *
- *     GuzzleHttp\Promise\queue()->run();
+ *     GuzzleHttp\Promise\Utils::queue()->run();
  */
-class TaskQueue implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\TaskQueueInterface
+class TaskQueue implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\TaskQueueInterface
 {
     private $enableShutdown = \true;
     private $queue = [];
@@ -39,8 +39,8 @@ class TaskQueue implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\TaskQueueInte
     }
     public function run()
     {
-        /** @var callable $task */
         while ($task = \array_shift($this->queue)) {
+            /** @var callable $task */
             $task();
         }
     }

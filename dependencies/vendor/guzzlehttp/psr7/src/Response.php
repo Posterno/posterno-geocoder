@@ -1,13 +1,13 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * PSR-7 response implementation.
  */
-class Response implements \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface
+class Response implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface
 {
     use MessageTrait;
     /** @var array Map of standard HTTP status code/reason phrases */
@@ -30,7 +30,7 @@ class Response implements \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterfac
         $this->assertStatusCodeRange($status);
         $this->statusCode = $status;
         if ($body !== '' && $body !== null) {
-            $this->stream = stream_for($body);
+            $this->stream = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor($body);
         }
         $this->setHeaders($headers);
         if ($reason == '' && isset(self::$phrases[$this->statusCode])) {
@@ -58,7 +58,7 @@ class Response implements \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterfac
         if ($reasonPhrase == '' && isset(self::$phrases[$new->statusCode])) {
             $reasonPhrase = self::$phrases[$new->statusCode];
         }
-        $new->reasonPhrase = $reasonPhrase;
+        $new->reasonPhrase = (string) $reasonPhrase;
         return $new;
     }
     private function assertStatusCodeIsInteger($statusCode)

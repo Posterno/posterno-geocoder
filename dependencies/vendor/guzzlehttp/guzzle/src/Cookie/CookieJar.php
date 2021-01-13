@@ -1,13 +1,13 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Cookie;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
 /**
  * Cookie jar that stores cookies as an array
  */
-class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInterface
+class CookieJar implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInterface
 {
     /** @var SetCookie[] Loaded cookie data */
     private $cookies = [];
@@ -24,8 +24,8 @@ class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInter
     {
         $this->strictMode = $strictMode;
         foreach ($cookieArray as $cookie) {
-            if (!$cookie instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie) {
-                $cookie = new \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie($cookie);
+            if (!$cookie instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie) {
+                $cookie = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie($cookie);
             }
             $this->setCookie($cookie);
         }
@@ -42,7 +42,7 @@ class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInter
     {
         $cookieJar = new self();
         foreach ($cookies as $name => $value) {
-            $cookieJar->setCookie(new \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie(['Domain' => $domain, 'Name' => $name, 'Value' => $value, 'Discard' => \true]));
+            $cookieJar->setCookie(new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie(['Domain' => $domain, 'Name' => $name, 'Value' => $value, 'Discard' => \true]));
         }
         return $cookieJar;
     }
@@ -61,7 +61,7 @@ class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInter
      * @param bool $allowSessionCookies If we should persist session cookies
      * @return bool
      */
-    public static function shouldPersist(\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie, $allowSessionCookies = \false)
+    public static function shouldPersist(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie, $allowSessionCookies = \false)
     {
         if ($cookie->getExpires() || $allowSessionCookies) {
             if (!$cookie->getDiscard()) {
@@ -91,7 +91,7 @@ class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInter
     }
     public function toArray()
     {
-        return \array_map(function (\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) {
+        return \array_map(function (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) {
             return $cookie->toArray();
         }, $this->getIterator()->getArrayCopy());
     }
@@ -101,26 +101,26 @@ class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInter
             $this->cookies = [];
             return;
         } elseif (!$path) {
-            $this->cookies = \array_filter($this->cookies, function (\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) use($domain) {
+            $this->cookies = \array_filter($this->cookies, function (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) use($domain) {
                 return !$cookie->matchesDomain($domain);
             });
         } elseif (!$name) {
-            $this->cookies = \array_filter($this->cookies, function (\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) use($path, $domain) {
+            $this->cookies = \array_filter($this->cookies, function (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) use($path, $domain) {
                 return !($cookie->matchesPath($path) && $cookie->matchesDomain($domain));
             });
         } else {
-            $this->cookies = \array_filter($this->cookies, function (\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) use($path, $domain, $name) {
+            $this->cookies = \array_filter($this->cookies, function (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) use($path, $domain, $name) {
                 return !($cookie->getName() == $name && $cookie->matchesPath($path) && $cookie->matchesDomain($domain));
             });
         }
     }
     public function clearSessionCookies()
     {
-        $this->cookies = \array_filter($this->cookies, function (\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) {
+        $this->cookies = \array_filter($this->cookies, function (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie) {
             return !$cookie->getDiscard() && $cookie->getExpires();
         });
     }
-    public function setCookie(\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie)
+    public function setCookie(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie)
     {
         // If the name string is empty (but not 0), ignore the set-cookie
         // string entirely.
@@ -176,11 +176,11 @@ class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInter
     {
         return new \ArrayIterator(\array_values($this->cookies));
     }
-    public function extractCookies(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response)
+    public function extractCookies(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response)
     {
         if ($cookieHeader = $response->getHeader('Set-Cookie')) {
             foreach ($cookieHeader as $cookie) {
-                $sc = \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie::fromString($cookie);
+                $sc = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie::fromString($cookie);
                 if (!$sc->getDomain()) {
                     $sc->setDomain($request->getUri()->getHost());
                 }
@@ -199,7 +199,7 @@ class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInter
      * @param RequestInterface $request
      * @return string
      */
-    private function getCookiePathFromRequest(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request)
+    private function getCookiePathFromRequest(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request)
     {
         $uriPath = $request->getUri()->getPath();
         if ('' === $uriPath) {
@@ -216,7 +216,7 @@ class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInter
         }
         return \substr($uriPath, 0, $lastSlashPos);
     }
-    public function withCookieHeader(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request)
+    public function withCookieHeader(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request)
     {
         $values = [];
         $uri = $request->getUri();
@@ -236,7 +236,7 @@ class CookieJar implements \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJarInter
      *
      * @param SetCookie $cookie
      */
-    private function removeCookieIfEmpty(\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie)
+    private function removeCookieIfEmpty(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie)
     {
         $cookieValue = $cookie->getValue();
         if ($cookieValue === null || $cookieValue === '') {

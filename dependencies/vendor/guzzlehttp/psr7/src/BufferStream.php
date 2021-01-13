@@ -1,8 +1,8 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Provides a buffer stream that can be written to to fill a buffer, and read
  * from to remove bytes from the buffer.
@@ -11,7 +11,7 @@ use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
  * what the configured high water mark of the stream is, or the maximum
  * preferred size of the buffer.
  */
-class BufferStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
+class BufferStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
 {
     private $hwm;
     private $buffer = '';
@@ -43,6 +43,7 @@ class BufferStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterf
     public function detach()
     {
         $this->close();
+        return null;
     }
     public function getSize()
     {

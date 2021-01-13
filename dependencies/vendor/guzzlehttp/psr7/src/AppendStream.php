@@ -1,14 +1,14 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Reads from multiple streams, one after the other.
  *
  * This is a read-only stream decorator.
  */
-class AppendStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
+class AppendStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
 {
     /** @var StreamInterface[] Streams being decorated */
     private $streams = [];
@@ -41,7 +41,7 @@ class AppendStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterf
      *
      * @throws \InvalidArgumentException if the stream is not readable
      */
-    public function addStream(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
+    public function addStream(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
     {
         if (!$stream->isReadable()) {
             throw new \InvalidArgumentException('Each stream must be readable');
@@ -54,7 +54,7 @@ class AppendStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterf
     }
     public function getContents()
     {
-        return copy_to_string($this);
+        return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::copyToString($this);
     }
     /**
      * Closes each attached stream.
@@ -85,6 +85,7 @@ class AppendStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterf
             $stream->detach();
         }
         $this->streams = [];
+        return null;
     }
     public function tell()
     {

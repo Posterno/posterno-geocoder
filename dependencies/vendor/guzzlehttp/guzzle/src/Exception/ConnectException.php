@@ -1,16 +1,16 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Exception;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * Exception thrown when a connection cannot be established.
  *
  * Note that no response is present for a ConnectException
  */
-class ConnectException extends \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException
+class ConnectException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException
 {
-    public function __construct($message, \PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \Exception $previous = null, array $handlerContext = [])
+    public function __construct($message, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \Exception $previous = null, array $handlerContext = [])
     {
         parent::__construct($message, $request, null, $previous, $handlerContext);
     }

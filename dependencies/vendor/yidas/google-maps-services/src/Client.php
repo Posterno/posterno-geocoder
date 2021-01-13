@@ -1,9 +1,9 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\yidas\googleMaps;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps;
 
 use Exception;
-use PNO\Geocoder\Vendor\GuzzleHttp\Client as HttpClient;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Client as HttpClient;
 /**
  * Google Maps PHP Client
  * 
@@ -100,7 +100,7 @@ class Client
             $this->setLanguage($defaultLang);
         }
         // Load GuzzleHttp\Client
-        $this->httpClient = new \PNO\Geocoder\Vendor\GuzzleHttp\Client(['base_uri' => self::API_HOST, 'timeout' => 5.0]);
+        $this->httpClient = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Client(['base_uri' => self::API_HOST, 'timeout' => 5.0]);
         return $this;
     }
     /**

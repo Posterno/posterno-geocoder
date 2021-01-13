@@ -1,12 +1,12 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Decorator used to return only a subset of a stream
  */
-class LimitStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
+class LimitStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
 {
     use StreamDecoratorTrait;
     /** @var int Offset to start reading from */
@@ -20,7 +20,7 @@ class LimitStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterfa
      * @param int             $offset Position to seek to before reading (only
      *                                works on seekable streams).
      */
-    public function __construct(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $limit = -1, $offset = 0)
+    public function __construct(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $limit = -1, $offset = 0)
     {
         $this->stream = $stream;
         $this->setLimit($limit);
