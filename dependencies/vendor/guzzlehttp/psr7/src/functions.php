@@ -1,11 +1,11 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
 /**
  * Returns the string representation of an HTTP message.
  *
@@ -15,9 +15,9 @@ use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
  *
  * @deprecated str will be removed in guzzlehttp/psr7:2.0. Use Message::toString instead.
  */
-function str(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message)
+function str(\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::toString($message);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::toString($message);
 }
 /**
  * Returns a UriInterface for the given value.
@@ -36,7 +36,7 @@ function str(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\MessageIn
  */
 function uri_for($uri)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::uriFor($uri);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::uriFor($uri);
 }
 /**
  * Create a new stream based on the input type.
@@ -78,7 +78,7 @@ function uri_for($uri)
  */
 function stream_for($resource = '', array $options = [])
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor($resource, $options);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor($resource, $options);
 }
 /**
  * Parse an array of header values containing ";" separated data into an
@@ -94,7 +94,7 @@ function stream_for($resource = '', array $options = [])
  */
 function parse_header($header)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Header::parse($header);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Header::parse($header);
 }
 /**
  * Converts an array of header values that may contain comma separated
@@ -108,7 +108,7 @@ function parse_header($header)
  */
 function normalize_header($header)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Header::normalize($header);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Header::normalize($header);
 }
 /**
  * Clone and modify a request with the given changes.
@@ -132,9 +132,9 @@ function normalize_header($header)
  *
  * @deprecated modify_request will be removed in guzzlehttp/psr7:2.0. Use Utils::modifyRequest instead.
  */
-function modify_request(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $changes)
+function modify_request(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $changes)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::modifyRequest($request, $changes);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::modifyRequest($request, $changes);
 }
 /**
  * Attempts to rewind a message body and throws an exception on failure.
@@ -148,9 +148,9 @@ function modify_request(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Messag
  *
  * @deprecated rewind_body will be removed in guzzlehttp/psr7:2.0. Use Message::rewindBody instead.
  */
-function rewind_body(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message)
+function rewind_body(\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message)
 {
-    \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::rewindBody($message);
+    \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::rewindBody($message);
 }
 /**
  * Safely opens a PHP stream resource using a filename.
@@ -169,7 +169,7 @@ function rewind_body(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\M
  */
 function try_fopen($filename, $mode)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::tryFopen($filename, $mode);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::tryFopen($filename, $mode);
 }
 /**
  * Copy the contents of a stream into a string until the given number of
@@ -184,9 +184,9 @@ function try_fopen($filename, $mode)
  *
  * @deprecated copy_to_string will be removed in guzzlehttp/psr7:2.0. Use Utils::copyToString instead.
  */
-function copy_to_string(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $maxLen = -1)
+function copy_to_string(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $maxLen = -1)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::copyToString($stream, $maxLen);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::copyToString($stream, $maxLen);
 }
 /**
  * Copy the contents of a stream into another stream until the given number
@@ -201,9 +201,9 @@ function copy_to_string(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Messag
  *
  * @deprecated copy_to_stream will be removed in guzzlehttp/psr7:2.0. Use Utils::copyToStream instead.
  */
-function copy_to_stream(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $source, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $dest, $maxLen = -1)
+function copy_to_stream(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $source, \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $dest, $maxLen = -1)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::copyToStream($source, $dest, $maxLen);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::copyToStream($source, $dest, $maxLen);
 }
 /**
  * Calculate a hash of a stream.
@@ -221,9 +221,9 @@ function copy_to_stream(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Messag
  *
  * @deprecated hash will be removed in guzzlehttp/psr7:2.0. Use Utils::hash instead.
  */
-function hash(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $algo, $rawOutput = \false)
+function hash(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $algo, $rawOutput = \false)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::hash($stream, $algo, $rawOutput);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::hash($stream, $algo, $rawOutput);
 }
 /**
  * Read a line from the stream up to the maximum allowed buffer length.
@@ -235,9 +235,9 @@ function hash(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamIn
  *
  * @deprecated readline will be removed in guzzlehttp/psr7:2.0. Use Utils::readLine instead.
  */
-function readline(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $maxLength = null)
+function readline(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $maxLength = null)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::readLine($stream, $maxLength);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::readLine($stream, $maxLength);
 }
 /**
  * Parses a request message string into a request object.
@@ -250,7 +250,7 @@ function readline(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\Stre
  */
 function parse_request($message)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::parseRequest($message);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::parseRequest($message);
 }
 /**
  * Parses a response message string into a response object.
@@ -263,7 +263,7 @@ function parse_request($message)
  */
 function parse_response($message)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::parseResponse($message);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::parseResponse($message);
 }
 /**
  * Parse a query string into an associative array.
@@ -282,7 +282,7 @@ function parse_response($message)
  */
 function parse_query($str, $urlEncoding = \true)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Query::parse($str, $urlEncoding);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Query::parse($str, $urlEncoding);
 }
 /**
  * Build a query string from an array of key value pairs.
@@ -301,7 +301,7 @@ function parse_query($str, $urlEncoding = \true)
  */
 function build_query(array $params, $encoding = \PHP_QUERY_RFC3986)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Query::build($params, $encoding);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Query::build($params, $encoding);
 }
 /**
  * Determines the mimetype of a file by looking at its extension.
@@ -314,7 +314,7 @@ function build_query(array $params, $encoding = \PHP_QUERY_RFC3986)
  */
 function mimetype_from_filename($filename)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\MimeType::fromFilename($filename);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\MimeType::fromFilename($filename);
 }
 /**
  * Maps a file extensions to a mimetype.
@@ -328,7 +328,7 @@ function mimetype_from_filename($filename)
  */
 function mimetype_from_extension($extension)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\MimeType::fromExtension($extension);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\MimeType::fromExtension($extension);
 }
 /**
  * Parses an HTTP message into an associative array.
@@ -346,7 +346,7 @@ function mimetype_from_extension($extension)
  */
 function _parse_message($message)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::parseMessage($message);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::parseMessage($message);
 }
 /**
  * Constructs a URI for an HTTP request message.
@@ -361,7 +361,7 @@ function _parse_message($message)
  */
 function _parse_request_uri($path, array $headers)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::parseRequestUri($path, $headers);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::parseRequestUri($path, $headers);
 }
 /**
  * Get a short summary of the message body.
@@ -375,9 +375,9 @@ function _parse_request_uri($path, array $headers)
  *
  * @deprecated get_message_body_summary will be removed in guzzlehttp/psr7:2.0. Use Message::bodySummary instead.
  */
-function get_message_body_summary(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message, $truncateAt = 120)
+function get_message_body_summary(\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message, $truncateAt = 120)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::bodySummary($message, $truncateAt);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Message::bodySummary($message, $truncateAt);
 }
 /**
  * Remove the items given by the keys, case insensitively from the data.
@@ -391,5 +391,5 @@ function get_message_body_summary(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\H
  */
 function _caseless_remove($keys, array $data)
 {
-    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove($keys, $data);
+    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::caselessRemove($keys, $data);
 }

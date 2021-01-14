@@ -1,9 +1,9 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps;
+namespace PNO\Geocoder\Vendor\yidas\googleMaps;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Service;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Client;
 /**
  * Directions Service
  * 
@@ -11,7 +11,7 @@ use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
  * @since   1.0.0
  * @see https://developers.google.com/maps/documentation/timezone/
  */
-class Timezone extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service
+class Timezone extends \PNO\Geocoder\Vendor\yidas\googleMaps\Service
 {
     const API_PATH = '/maps/api/timezone/json';
     /**
@@ -23,7 +23,7 @@ class Timezone extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps
      * @param array Query parameters
      * @return array Result
      */
-    public static function timezone(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $location, $timestamp = null, $params = [])
+    public static function timezone(\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $location, $timestamp = null, $params = [])
     {
         // `location` seems to only allow `lat,lng` pattern
         if (\is_string($location)) {

@@ -1,15 +1,15 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Compose stream implementations based on a hash of functions.
  *
  * Allows for easy testing and extension of a provided stream without needing
  * to create a concrete class for a simple extension point.
  */
-class FnStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
+class FnStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
 {
     /** @var array */
     private $methods;
@@ -61,7 +61,7 @@ class FnStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Mess
      *
      * @return FnStream
      */
-    public static function decorate(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, array $methods)
+    public static function decorate(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, array $methods)
     {
         // If any of the required methods were not provided, then simply
         // proxy to the decorated stream.

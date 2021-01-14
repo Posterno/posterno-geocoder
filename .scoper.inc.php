@@ -24,6 +24,7 @@ return [
 		in(
 			[
 				'vendor/yidas/google-maps-services/',
+				'vendor/psr/',
 				'vendor/guzzlehttp/'
 			]
 		)->

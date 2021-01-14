@@ -11,6 +11,10 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+require_once trailingslashit( dirname( __FILE__ ) ) . 'dependencies/vendor/guzzlehttp/guzzle/src/functions.php';
+require_once trailingslashit( dirname( __FILE__ ) ) . 'dependencies/vendor/guzzlehttp/psr7/src/functions.php';
+require_once trailingslashit( dirname( __FILE__ ) ) . 'dependencies/vendor/guzzlehttp/promises/src/functions.php';
+
 /**
  * Determine if the geocoder is enabled.
  *

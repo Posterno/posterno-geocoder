@@ -1,9 +1,9 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps;
+namespace PNO\Geocoder\Vendor\yidas\googleMaps;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Service;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Client;
 /**
  * Geocoding Service
  * 
@@ -11,7 +11,7 @@ use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
  * @since   1.0.0
  * @see https://developers.google.com/maps/documentation/geocoding/
  */
-class Geocoding extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service
+class Geocoding extends \PNO\Geocoder\Vendor\yidas\googleMaps\Service
 {
     const API_PATH = '/maps/api/geocode/json';
     /**
@@ -22,7 +22,7 @@ class Geocoding extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMap
      * @param array Query parameters
      * @return array Result
      */
-    public static function geocode(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $address = null, $params = [])
+    public static function geocode(\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $address = null, $params = [])
     {
         if (\is_string($address)) {
             $params['address'] = $address;
@@ -37,7 +37,7 @@ class Geocoding extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMap
      * @param array Query parameters
      * @return array Result
      */
-    public static function reverseGeocode(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $latlng, $params = [])
+    public static function reverseGeocode(\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $latlng, $params = [])
     {
         // Check if latlng param is a place_id string.
         // place_id strings do not contain commas; latlng strings do.

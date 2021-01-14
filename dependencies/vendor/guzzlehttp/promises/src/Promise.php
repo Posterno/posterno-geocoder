@@ -1,13 +1,13 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 /**
  * Promises/A+ implementation that avoids recursion when possible.
  *
  * @link https://promisesaplus.com/
  */
-class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface
+class Promise implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface
 {
     private $state = self::PENDING;
     private $result;
@@ -27,7 +27,7 @@ class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Pro
     public function then(callable $onFulfilled = null, callable $onRejected = null)
     {
         if ($this->state === self::PENDING) {
-            $p = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise(null, [$this, 'cancel']);
+            $p = new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise(null, [$this, 'cancel']);
             $this->handlers[] = [$p, $onFulfilled, $onRejected];
             $p->waitList = $this->waitList;
             $p->waitList[] = $this;
@@ -35,12 +35,12 @@ class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Pro
         }
         // Return a fulfilled promise and immediately invoke any callbacks.
         if ($this->state === self::FULFILLED) {
-            $promise = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::promiseFor($this->result);
+            $promise = \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::promiseFor($this->result);
             return $onFulfilled ? $promise->then($onFulfilled) : $promise;
         }
         // It's either cancelled or rejected, so return a rejected promise
         // and immediately invoke any callbacks.
-        $rejection = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::rejectionFor($this->result);
+        $rejection = \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::rejectionFor($this->result);
         return $onRejected ? $rejection->then(null, $onRejected) : $rejection;
     }
     public function otherwise(callable $onRejected)
@@ -50,7 +50,7 @@ class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Pro
     public function wait($unwrap = \true)
     {
         $this->waitIfPending();
-        if ($this->result instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface) {
+        if ($this->result instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface) {
             return $this->result->wait($unwrap);
         }
         if ($unwrap) {
@@ -58,7 +58,7 @@ class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Pro
                 return $this->result;
             }
             // It's rejected so "unwrap" and throw an exception.
-            throw \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::exceptionFor($this->result);
+            throw \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::exceptionFor($this->result);
         }
     }
     public function getState()
@@ -85,7 +85,7 @@ class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Pro
         // Reject the promise only if it wasn't rejected in a then callback.
         /** @psalm-suppress RedundantCondition */
         if ($this->state === self::PENDING) {
-            $this->reject(new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\CancellationException('Promise has been cancelled'));
+            $this->reject(new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\CancellationException('Promise has been cancelled'));
         }
     }
     public function resolve($value)
@@ -123,12 +123,12 @@ class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Pro
         if (!\is_object($value) || !\method_exists($value, 'then')) {
             $id = $state === self::FULFILLED ? 1 : 2;
             // It's a success, so resolve the handlers in the queue.
-            \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Utils::queue()->add(static function () use($id, $value, $handlers) {
+            \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Utils::queue()->add(static function () use($id, $value, $handlers) {
                 foreach ($handlers as $handler) {
                     self::callHandler($id, $value, $handler);
                 }
             });
-        } elseif ($value instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise && \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::pending($value)) {
+        } elseif ($value instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise && \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::pending($value)) {
             // We can just merge our handlers onto the next promise.
             $value->handlers = \array_merge($value->handlers, $handlers);
         } else {
@@ -157,7 +157,7 @@ class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Pro
         $promise = $handler[0];
         // The promise may have been cancelled or resolved before placing
         // this thunk in the queue.
-        if (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::settled($promise)) {
+        if (\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::settled($promise)) {
             return;
         }
         try {
@@ -196,7 +196,7 @@ class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Pro
             // If there's no wait function, then reject the promise.
             $this->reject('Cannot wait on a promise that has ' . 'no internal wait function. You must provide a wait ' . 'function when constructing the promise to be able to ' . 'wait on a promise.');
         }
-        \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Utils::queue()->run();
+        \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Utils::queue()->run();
         /** @psalm-suppress RedundantCondition */
         if ($this->state === self::PENDING) {
             $this->reject('Invoking the wait callback did not resolve the promise');
@@ -228,8 +228,8 @@ class Promise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Pro
             do {
                 $result->waitIfPending();
                 $result = $result->result;
-            } while ($result instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise);
-            if ($result instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface) {
+            } while ($result instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise);
+            if ($result instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface) {
                 $result->wait(\false);
             }
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 final class Is
 {
@@ -9,35 +9,35 @@ final class Is
      *
      * @return bool
      */
-    public static function pending(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
+    public static function pending(\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
     {
-        return $promise->getState() === \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::PENDING;
+        return $promise->getState() === \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::PENDING;
     }
     /**
      * Returns true if a promise is fulfilled or rejected.
      *
      * @return bool
      */
-    public static function settled(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
+    public static function settled(\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
     {
-        return $promise->getState() !== \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::PENDING;
+        return $promise->getState() !== \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::PENDING;
     }
     /**
      * Returns true if a promise is fulfilled.
      *
      * @return bool
      */
-    public static function fulfilled(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
+    public static function fulfilled(\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
     {
-        return $promise->getState() === \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::FULFILLED;
+        return $promise->getState() === \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::FULFILLED;
     }
     /**
      * Returns true if a promise is rejected.
      *
      * @return bool
      */
-    public static function rejected(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
+    public static function rejected(\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
     {
-        return $promise->getState() === \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED;
+        return $promise->getState() === \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED;
     }
 }

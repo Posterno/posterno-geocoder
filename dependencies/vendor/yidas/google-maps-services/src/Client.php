@@ -1,12 +1,12 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps;
+namespace PNO\Geocoder\Vendor\yidas\googleMaps;
 
 use Exception;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Client as HttpClient;
+use PNO\Geocoder\Vendor\GuzzleHttp\Client as HttpClient;
 /**
  * Google Maps PHP Client
- * 
+ *
  * @author  Nick Tsai <myintaer@gmail.com>
  * @version 1.0.0
  */
@@ -18,10 +18,10 @@ class Client
     const API_HOST = 'https://maps.googleapis.com';
     /**
      * For service autoload
-     * 
+     *
      * @see http://php.net/manual/en/language.namespaces.rules.php
      */
-    const SERVICE_NAMESPACE = "\\yidas\\googleMaps\\";
+    const SERVICE_NAMESPACE = "\\PNO\\Geocoder\\Vendor\\yidas\\googleMaps\\";
     /**
      * For Client-Service API method director
      *
@@ -30,7 +30,7 @@ class Client
     protected static $serviceMethodMap = ['directions' => 'Directions', 'distanceMatrix' => 'DistanceMatrix', 'elevation' => 'Elevation', 'geocode' => 'Geocoding', 'reverseGeocode' => 'Geocoding', 'geolocate' => 'Geolocation', 'timezone' => 'Timezone'];
     /**
      * Google API Key
-     * 
+     *
      * Authenticating by API Key, otherwise by client ID/digital signature
      *
      * @var string
@@ -100,7 +100,7 @@ class Client
             $this->setLanguage($defaultLang);
         }
         // Load GuzzleHttp\Client
-        $this->httpClient = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Client(['base_uri' => self::API_HOST, 'timeout' => 5.0]);
+        $this->httpClient = new \PNO\Geocoder\Vendor\GuzzleHttp\Client(['base_uri' => self::API_HOST, 'timeout' => 5.0]);
         return $this;
     }
     /**
@@ -143,13 +143,13 @@ class Client
     }
     /**
      * Client methods refer to each service
-     * 
+     *
      * All service methods from Client calling would leave out the first argument (Client itself).
      *
      * @param string Client's method name
      * @param array Method arguments
      * @return mixed Current service method return
-     * @example 
+     * @example
      *  $equal = \yidas\googleMaps\Geocoding::geocode($client, 'Address');
      *  $equal = $client->geocode('Address');
      */

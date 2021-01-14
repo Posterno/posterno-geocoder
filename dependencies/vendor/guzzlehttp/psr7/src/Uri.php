@@ -1,8 +1,8 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
 /**
  * PSR-7 URI implementation.
  *
@@ -10,7 +10,7 @@ use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
  * @author Tobias Schultze
  * @author Matthew Weier O'Phinney
  */
-class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface
+class Uri implements \PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface
 {
     /**
      * Absolute http and https URIs require a host per RFC 7230 Section 2.7
@@ -110,7 +110,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      *
      * @return bool
      */
-    public static function isDefaultPort(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
+    public static function isDefaultPort(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
     {
         return $uri->getPort() === null || isset(self::$defaultPorts[$uri->getScheme()]) && $uri->getPort() === self::$defaultPorts[$uri->getScheme()];
     }
@@ -132,7 +132,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      * @see Uri::isRelativePathReference
      * @link https://tools.ietf.org/html/rfc3986#section-4
      */
-    public static function isAbsolute(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
+    public static function isAbsolute(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
     {
         return $uri->getScheme() !== '';
     }
@@ -146,7 +146,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      * @return bool
      * @link https://tools.ietf.org/html/rfc3986#section-4.2
      */
-    public static function isNetworkPathReference(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
+    public static function isNetworkPathReference(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
     {
         return $uri->getScheme() === '' && $uri->getAuthority() !== '';
     }
@@ -160,7 +160,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      * @return bool
      * @link https://tools.ietf.org/html/rfc3986#section-4.2
      */
-    public static function isAbsolutePathReference(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
+    public static function isAbsolutePathReference(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
     {
         return $uri->getScheme() === '' && $uri->getAuthority() === '' && isset($uri->getPath()[0]) && $uri->getPath()[0] === '/';
     }
@@ -174,7 +174,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      * @return bool
      * @link https://tools.ietf.org/html/rfc3986#section-4.2
      */
-    public static function isRelativePathReference(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
+    public static function isRelativePathReference(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
     {
         return $uri->getScheme() === '' && $uri->getAuthority() === '' && (!isset($uri->getPath()[0]) || $uri->getPath()[0] !== '/');
     }
@@ -191,10 +191,10 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      * @return bool
      * @link https://tools.ietf.org/html/rfc3986#section-4.4
      */
-    public static function isSameDocumentReference(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $base = null)
+    public static function isSameDocumentReference(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, \PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $base = null)
     {
         if ($base !== null) {
-            $uri = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UriResolver::resolve($base, $uri);
+            $uri = \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UriResolver::resolve($base, $uri);
             return $uri->getScheme() === $base->getScheme() && $uri->getAuthority() === $base->getAuthority() && $uri->getPath() === $base->getPath() && $uri->getQuery() === $base->getQuery();
         }
         return $uri->getScheme() === '' && $uri->getAuthority() === '' && $uri->getPath() === '' && $uri->getQuery() === '';
@@ -211,7 +211,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      */
     public static function removeDotSegments($path)
     {
-        return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UriResolver::removeDotSegments($path);
+        return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UriResolver::removeDotSegments($path);
     }
     /**
      * Converts the relative URI into a new URI that is resolved against the base URI.
@@ -224,12 +224,12 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      * @deprecated since version 1.4. Use UriResolver::resolve instead.
      * @see UriResolver::resolve
      */
-    public static function resolve(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $base, $rel)
+    public static function resolve(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $base, $rel)
     {
-        if (!$rel instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface) {
+        if (!$rel instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface) {
             $rel = new self($rel);
         }
-        return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UriResolver::resolve($base, $rel);
+        return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\UriResolver::resolve($base, $rel);
     }
     /**
      * Creates a new URI with a specific query string value removed.
@@ -242,7 +242,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      *
      * @return UriInterface
      */
-    public static function withoutQueryValue(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, $key)
+    public static function withoutQueryValue(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, $key)
     {
         $result = self::getFilteredQueryString($uri, [$key]);
         return $uri->withQuery(\implode('&', $result));
@@ -262,7 +262,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      *
      * @return UriInterface
      */
-    public static function withQueryValue(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, $key, $value)
+    public static function withQueryValue(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, $key, $value)
     {
         $result = self::getFilteredQueryString($uri, [$key]);
         $result[] = self::generateQueryString($key, $value);
@@ -278,7 +278,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      *
      * @return UriInterface
      */
-    public static function withQueryValues(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, array $keyValueArray)
+    public static function withQueryValues(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, array $keyValueArray)
     {
         $result = self::getFilteredQueryString($uri, \array_keys($keyValueArray));
         foreach ($keyValueArray as $key => $value) {
@@ -507,7 +507,7 @@ class Uri implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\U
      * 
      * @return array
      */
-    private static function getFilteredQueryString(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, array $keys)
+    private static function getFilteredQueryString(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, array $keys)
     {
         $current = $uri->getQuery();
         if ($current === '') {

@@ -1,17 +1,17 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Handler;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\TransferStats;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Utils;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException;
+use PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException;
+use PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise;
+use PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+use PNO\Geocoder\Vendor\GuzzleHttp\TransferStats;
+use PNO\Geocoder\Vendor\GuzzleHttp\Utils;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * HTTP handler that uses PHP's HTTP stream wrapper.
  */
@@ -26,13 +26,13 @@ class StreamHandler
      *
      * @return PromiseInterface
      */
-    public function __invoke(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
+    public function __invoke(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
     {
         // Sleep if there is a delay specified.
         if (isset($options['delay'])) {
             \usleep($options['delay'] * 1000);
         }
-        $startTime = isset($options['on_stats']) ? \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Utils::currentTime() : null;
+        $startTime = isset($options['on_stats']) ? \PNO\Geocoder\Vendor\GuzzleHttp\Utils::currentTime() : null;
         try {
             // Does not support the expect header.
             $request = $request->withoutHeader('Expect');
@@ -49,21 +49,21 @@ class StreamHandler
             $message = $e->getMessage();
             // This list can probably get more comprehensive.
             if (\strpos($message, 'getaddrinfo') || \strpos($message, 'Connection refused') || \strpos($message, "couldn't connect to host") || \strpos($message, "connection attempt failed")) {
-                $e = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException($e->getMessage(), $request, $e);
+                $e = new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException($e->getMessage(), $request, $e);
             }
-            $e = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException::wrapException($request, $e);
+            $e = \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException::wrapException($request, $e);
             $this->invokeStats($options, $request, $startTime, null, $e);
             return \PNO\Geocoder\Vendor\GuzzleHttp\Promise\rejection_for($e);
         }
     }
-    private function invokeStats(array $options, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, $startTime, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response = null, $error = null)
+    private function invokeStats(array $options, \PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, $startTime, \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response = null, $error = null)
     {
         if (isset($options['on_stats'])) {
-            $stats = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\TransferStats($request, $response, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Utils::currentTime() - $startTime, $error, []);
+            $stats = new \PNO\Geocoder\Vendor\GuzzleHttp\TransferStats($request, $response, \PNO\Geocoder\Vendor\GuzzleHttp\Utils::currentTime() - $startTime, $error, []);
             \call_user_func($options['on_stats'], $stats);
         }
     }
-    private function createResponse(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options, $stream, $startTime)
+    private function createResponse(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options, $stream, $startTime)
     {
         $hdrs = $this->lastHeaders;
         $this->lastHeaders = [];
@@ -73,18 +73,18 @@ class StreamHandler
         $reason = isset($parts[2]) ? $parts[2] : null;
         $headers = \PNO\Geocoder\Vendor\GuzzleHttp\headers_from_lines($hdrs);
         list($stream, $headers) = $this->checkDecode($options, $headers, $stream);
-        $stream = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\stream_for($stream);
+        $stream = \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\stream_for($stream);
         $sink = $stream;
         if (\strcasecmp('HEAD', $request->getMethod())) {
             $sink = $this->createSink($stream, $options);
         }
-        $response = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Response($status, $headers, $sink, $ver, $reason);
+        $response = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Response($status, $headers, $sink, $ver, $reason);
         if (isset($options['on_headers'])) {
             try {
                 $options['on_headers']($response);
             } catch (\Exception $e) {
                 $msg = 'An error was encountered during the on_headers event';
-                $ex = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException($msg, $request, $response, $e);
+                $ex = new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException($msg, $request, $response, $e);
                 return \PNO\Geocoder\Vendor\GuzzleHttp\Promise\rejection_for($ex);
             }
         }
@@ -94,15 +94,15 @@ class StreamHandler
             $this->drain($stream, $sink, $response->getHeaderLine('Content-Length'));
         }
         $this->invokeStats($options, $request, $startTime, $response, null);
-        return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise($response);
+        return new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise($response);
     }
-    private function createSink(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, array $options)
+    private function createSink(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, array $options)
     {
         if (!empty($options['stream'])) {
             return $stream;
         }
         $sink = isset($options['sink']) ? $options['sink'] : \fopen('php://temp', 'r+');
-        return \is_string($sink) ? new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream($sink, 'w+') : \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\stream_for($sink);
+        return \is_string($sink) ? new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\LazyOpenStream($sink, 'w+') : \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\stream_for($sink);
     }
     private function checkDecode(array $options, array $headers, $stream)
     {
@@ -112,7 +112,7 @@ class StreamHandler
             if (isset($normalizedKeys['content-encoding'])) {
                 $encoding = $headers[$normalizedKeys['content-encoding']];
                 if ($encoding[0] === 'gzip' || $encoding[0] === 'deflate') {
-                    $stream = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\InflateStream(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\stream_for($stream));
+                    $stream = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\InflateStream(\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\stream_for($stream));
                     $headers['x-encoded-content-encoding'] = $headers[$normalizedKeys['content-encoding']];
                     // Remove content-encoding header
                     unset($headers[$normalizedKeys['content-encoding']]);
@@ -142,13 +142,13 @@ class StreamHandler
      * @return StreamInterface
      * @throws \RuntimeException when the sink option is invalid.
      */
-    private function drain(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $source, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $sink, $contentLength)
+    private function drain(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $source, \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $sink, $contentLength)
     {
         // If a content-length header is provided, then stop reading once
         // that number of bytes has been read. This can prevent infinitely
         // reading from a stream when dealing with servers that do not honor
         // Connection: Close headers.
-        \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\copy_to_stream($source, $sink, \strlen($contentLength) > 0 && (int) $contentLength > 0 ? (int) $contentLength : -1);
+        \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\copy_to_stream($source, $sink, \strlen($contentLength) > 0 && (int) $contentLength > 0 ? (int) $contentLength : -1);
         $sink->seek(0);
         $source->close();
         return $sink;
@@ -181,7 +181,7 @@ class StreamHandler
         }
         return $resource;
     }
-    private function createStream(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
+    private function createStream(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
     {
         static $methods;
         if (!$methods) {
@@ -235,27 +235,27 @@ class StreamHandler
             return $resource;
         });
     }
-    private function resolveHost(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
+    private function resolveHost(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
     {
         $uri = $request->getUri();
         if (isset($options['force_ip_resolve']) && !\filter_var($uri->getHost(), \FILTER_VALIDATE_IP)) {
             if ('v4' === $options['force_ip_resolve']) {
                 $records = \dns_get_record($uri->getHost(), \DNS_A);
                 if (!isset($records[0]['ip'])) {
-                    throw new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException(\sprintf("Could not resolve IPv4 address for host '%s'", $uri->getHost()), $request);
+                    throw new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException(\sprintf("Could not resolve IPv4 address for host '%s'", $uri->getHost()), $request);
                 }
                 $uri = $uri->withHost($records[0]['ip']);
             } elseif ('v6' === $options['force_ip_resolve']) {
                 $records = \dns_get_record($uri->getHost(), \DNS_AAAA);
                 if (!isset($records[0]['ipv6'])) {
-                    throw new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException(\sprintf("Could not resolve IPv6 address for host '%s'", $uri->getHost()), $request);
+                    throw new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\ConnectException(\sprintf("Could not resolve IPv6 address for host '%s'", $uri->getHost()), $request);
                 }
                 $uri = $uri->withHost('[' . $records[0]['ipv6'] . ']');
             }
         }
         return $uri;
     }
-    private function getDefaultContext(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request)
+    private function getDefaultContext(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request)
     {
         $headers = '';
         foreach ($request->getHeaders() as $name => $value) {
@@ -275,7 +275,7 @@ class StreamHandler
         $context['http']['header'] = \rtrim($context['http']['header']);
         return $context;
     }
-    private function add_proxy(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
+    private function add_proxy(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
     {
         if (!\is_array($value)) {
             $options['http']['proxy'] = $value;
@@ -288,13 +288,13 @@ class StreamHandler
             }
         }
     }
-    private function add_timeout(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
+    private function add_timeout(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
     {
         if ($value > 0) {
             $options['http']['timeout'] = $value;
         }
     }
-    private function add_verify(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
+    private function add_verify(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
     {
         if ($value === \true) {
             // PHP 5.6 or greater will find the system cert by default. When
@@ -318,7 +318,7 @@ class StreamHandler
         $options['ssl']['verify_peer_name'] = \true;
         $options['ssl']['allow_self_signed'] = \false;
     }
-    private function add_cert(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
+    private function add_cert(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
     {
         if (\is_array($value)) {
             $options['ssl']['passphrase'] = $value[1];
@@ -329,7 +329,7 @@ class StreamHandler
         }
         $options['ssl']['local_cert'] = $value;
     }
-    private function add_progress(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
+    private function add_progress(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
     {
         $this->addNotification($params, function ($code, $a, $b, $c, $transferred, $total) use($value) {
             if ($code == \STREAM_NOTIFY_PROGRESS) {
@@ -337,7 +337,7 @@ class StreamHandler
             }
         });
     }
-    private function add_debug(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
+    private function add_debug(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, &$options, $value, &$params)
     {
         if ($value === \false) {
             return;

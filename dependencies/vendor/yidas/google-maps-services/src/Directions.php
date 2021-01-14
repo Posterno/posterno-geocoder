@@ -1,9 +1,9 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps;
+namespace PNO\Geocoder\Vendor\yidas\googleMaps;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Service;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Client;
 /**
  * Directions Service
  * 
@@ -11,7 +11,7 @@ use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
  * @since   1.0.0
  * @see     https://developers.google.com/maps/documentation/directions/
  */
-class Directions extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service
+class Directions extends \PNO\Geocoder\Vendor\yidas\googleMaps\Service
 {
     const API_PATH = '/maps/api/directions/json';
     /**
@@ -23,7 +23,7 @@ class Directions extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMa
      * @param array Query parameters
      * @return array Result
      */
-    public static function directions(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $origin, $destination, $params = [])
+    public static function directions(\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $origin, $destination, $params = [])
     {
         $params['origin'] = (string) $origin;
         $params['destination'] = (string) $destination;

@@ -1,10 +1,10 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
 final class Message
 {
     /**
@@ -14,14 +14,14 @@ final class Message
      *
      * @return string
      */
-    public static function toString(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message)
+    public static function toString(\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message)
     {
-        if ($message instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface) {
+        if ($message instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface) {
             $msg = \trim($message->getMethod() . ' ' . $message->getRequestTarget()) . ' HTTP/' . $message->getProtocolVersion();
             if (!$message->hasHeader('host')) {
                 $msg .= "\r\nHost: " . $message->getUri()->getHost();
             }
-        } elseif ($message instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface) {
+        } elseif ($message instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface) {
             $msg = 'HTTP/' . $message->getProtocolVersion() . ' ' . $message->getStatusCode() . ' ' . $message->getReasonPhrase();
         } else {
             throw new \InvalidArgumentException('Unknown message type');
@@ -47,7 +47,7 @@ final class Message
      *
      * @return string|null
      */
-    public static function bodySummary(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message, $truncateAt = 120)
+    public static function bodySummary(\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message, $truncateAt = 120)
     {
         $body = $message->getBody();
         if (!$body->isSeekable() || !$body->isReadable()) {
@@ -79,7 +79,7 @@ final class Message
      *
      * @throws \RuntimeException
      */
-    public static function rewindBody(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message)
+    public static function rewindBody(\PNO\Geocoder\Vendor\Psr\Http\Message\MessageInterface $message)
     {
         $body = $message->getBody();
         if ($body->tell()) {
@@ -117,14 +117,14 @@ final class Message
         list($startLine, $rawHeaders) = $headerParts;
         if (\preg_match("/(?:^HTTP\\/|^[A-Z]+ \\S+ HTTP\\/)(\\d+(?:\\.\\d+)?)/i", $startLine, $matches) && $matches[1] === '1.0') {
             // Header folding is deprecated for HTTP/1.1, but allowed in HTTP/1.0
-            $rawHeaders = \preg_replace(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Rfc7230::HEADER_FOLD_REGEX, ' ', $rawHeaders);
+            $rawHeaders = \preg_replace(\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Rfc7230::HEADER_FOLD_REGEX, ' ', $rawHeaders);
         }
         /** @var array[] $headerLines */
-        $count = \preg_match_all(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Rfc7230::HEADER_REGEX, $rawHeaders, $headerLines, \PREG_SET_ORDER);
+        $count = \preg_match_all(\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Rfc7230::HEADER_REGEX, $rawHeaders, $headerLines, \PREG_SET_ORDER);
         // If these aren't the same, then one line didn't match and there's an invalid header.
         if ($count !== \substr_count($rawHeaders, "\n")) {
             // Folding is deprecated, see https://tools.ietf.org/html/rfc7230#section-3.2.4
-            if (\preg_match(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Rfc7230::HEADER_FOLD_REGEX, $rawHeaders)) {
+            if (\preg_match(\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Rfc7230::HEADER_FOLD_REGEX, $rawHeaders)) {
                 throw new \InvalidArgumentException('Invalid header syntax: Obsolete line folding');
             }
             throw new \InvalidArgumentException('Invalid header syntax');
@@ -172,7 +172,7 @@ final class Message
         }
         $parts = \explode(' ', $data['start-line'], 3);
         $version = isset($parts[2]) ? \explode('/', $parts[2])[1] : '1.1';
-        $request = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request($parts[0], $matches[1] === '/' ? self::parseRequestUri($parts[1], $data['headers']) : $parts[1], $data['headers'], $data['body'], $version);
+        $request = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request($parts[0], $matches[1] === '/' ? self::parseRequestUri($parts[1], $data['headers']) : $parts[1], $data['headers'], $data['body'], $version);
         return $matches[1] === '/' ? $request : $request->withRequestTarget($parts[1]);
     }
     /**
@@ -192,6 +192,6 @@ final class Message
             throw new \InvalidArgumentException('Invalid response string: ' . $data['start-line']);
         }
         $parts = \explode(' ', $data['start-line'], 3);
-        return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Response((int) $parts[1], $data['headers'], $data['body'], \explode('/', $parts[0])[1], isset($parts[2]) ? $parts[2] : null);
+        return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Response((int) $parts[1], $data['headers'], $data['body'], \explode('/', $parts[0])[1], isset($parts[2]) ? $parts[2] : null);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Cookie;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
 /**
  * Stores HTTP cookies.
  *
@@ -26,14 +26,14 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
      *
      * @return RequestInterface returns the modified request.
      */
-    public function withCookieHeader(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request);
+    public function withCookieHeader(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request);
     /**
      * Extract cookies from an HTTP response and store them in the CookieJar.
      *
      * @param RequestInterface  $request  Request that was sent
      * @param ResponseInterface $response Response that was received
      */
-    public function extractCookies(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response);
+    public function extractCookies(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response);
     /**
      * Sets a cookie in the cookie jar.
      *
@@ -41,7 +41,7 @@ interface CookieJarInterface extends \Countable, \IteratorAggregate
      *
      * @return bool Returns true on success or false on failure
      */
-    public function setCookie(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie);
+    public function setCookie(\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie $cookie);
     /**
      * Remove cookies currently held in the cookie jar.
      *

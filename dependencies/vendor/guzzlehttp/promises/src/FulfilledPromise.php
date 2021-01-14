@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 /**
  * A promise that has been fulfilled.
@@ -8,7 +8,7 @@ namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
  * Thenning off of this promise will invoke the onFulfilled callback
  * immediately and ignore other callbacks.
  */
-class FulfilledPromise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface
+class FulfilledPromise implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface
 {
     private $value;
     public function __construct($value)
@@ -24,11 +24,11 @@ class FulfilledPromise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Guzzl
         if (!$onFulfilled) {
             return $this;
         }
-        $queue = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Utils::queue();
-        $p = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise([$queue, 'run']);
+        $queue = \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Utils::queue();
+        $p = new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise([$queue, 'run']);
         $value = $this->value;
         $queue->add(static function () use($p, $value, $onFulfilled) {
-            if (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::pending($p)) {
+            if (\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::pending($p)) {
                 try {
                     $p->resolve($onFulfilled($value));
                 } catch (\Throwable $e) {

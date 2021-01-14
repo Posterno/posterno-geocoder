@@ -1,9 +1,9 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps;
+namespace PNO\Geocoder\Vendor\yidas\googleMaps;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Service;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Client;
 /**
  * Directions Service
  * 
@@ -11,7 +11,7 @@ use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
  * @since   1.0.0
  * @see https://developers.google.com/maps/documentation/distance-matrix/
  */
-class DistanceMatrix extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service
+class DistanceMatrix extends \PNO\Geocoder\Vendor\yidas\googleMaps\Service
 {
     const API_PATH = '/maps/api/distancematrix/json';
     /**
@@ -23,7 +23,7 @@ class DistanceMatrix extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\goog
      * @param array Query parameters
      * @return array Result
      */
-    public static function distanceMatrix(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $origins, $destinations, $params = [])
+    public static function distanceMatrix(\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $origins, $destinations, $params = [])
     {
         $params['origins'] = (string) $origins;
         $params['destinations'] = (string) $destinations;

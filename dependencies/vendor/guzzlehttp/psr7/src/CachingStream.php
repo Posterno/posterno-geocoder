@@ -1,13 +1,13 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Stream decorator that can cache previously read bytes from a sequentially
  * read stream.
  */
-class CachingStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
+class CachingStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
 {
     use StreamDecoratorTrait;
     /** @var StreamInterface Stream being wrapped */
@@ -20,10 +20,10 @@ class CachingStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http
      * @param StreamInterface $stream Stream to cache
      * @param StreamInterface $target Optionally specify where data is cached
      */
-    public function __construct(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $target = null)
+    public function __construct(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $target = null)
     {
         $this->remoteStream = $stream;
-        $this->stream = $target ?: new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream(\fopen('php://temp', 'r+'));
+        $this->stream = $target ?: new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream(\fopen('php://temp', 'r+'));
     }
     public function getSize()
     {
@@ -108,8 +108,8 @@ class CachingStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http
     }
     private function cacheEntireStream()
     {
-        $target = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\FnStream(['write' => 'strlen']);
-        \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::copyToStream($this, $target);
+        $target = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\FnStream(['write' => 'strlen']);
+        \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::copyToStream($this, $target);
         return $this->tell();
     }
 }

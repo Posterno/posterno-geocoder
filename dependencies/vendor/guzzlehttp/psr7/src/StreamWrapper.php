@@ -1,8 +1,8 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Converts Guzzle streams into PHP stream resources.
  */
@@ -23,7 +23,7 @@ class StreamWrapper
      *
      * @throws \InvalidArgumentException if stream is not readable or writable
      */
-    public static function getResource(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
+    public static function getResource(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
     {
         self::register();
         if ($stream->isReadable()) {
@@ -42,7 +42,7 @@ class StreamWrapper
      *
      * @return resource
      */
-    public static function createStreamContext(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
+    public static function createStreamContext(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream)
     {
         return \stream_context_create(['guzzle' => ['stream' => $stream]]);
     }

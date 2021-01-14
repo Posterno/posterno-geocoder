@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 /**
  * A task queue that executes tasks in a FIFO order.
@@ -11,7 +11,7 @@ namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
  *
  *     GuzzleHttp\Promise\Utils::queue()->run();
  */
-class TaskQueue implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\TaskQueueInterface
+class TaskQueue implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\TaskQueueInterface
 {
     private $enableShutdown = \true;
     private $queue = [];

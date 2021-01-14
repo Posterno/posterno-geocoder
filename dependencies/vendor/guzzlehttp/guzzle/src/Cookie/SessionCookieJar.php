@@ -1,11 +1,11 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Cookie;
 
 /**
  * Persists cookies in the client session
  */
-class SessionCookieJar extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJar
+class SessionCookieJar extends \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJar
 {
     /** @var string session key */
     private $sessionKey;
@@ -41,7 +41,7 @@ class SessionCookieJar extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHt
         $json = [];
         foreach ($this as $cookie) {
             /** @var SetCookie $cookie */
-            if (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJar::shouldPersist($cookie, $this->storeSessionCookies)) {
+            if (\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\CookieJar::shouldPersist($cookie, $this->storeSessionCookies)) {
                 $json[] = $cookie->toArray();
             }
         }
@@ -58,7 +58,7 @@ class SessionCookieJar extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHt
         $data = \json_decode($_SESSION[$this->sessionKey], \true);
         if (\is_array($data)) {
             foreach ($data as $cookie) {
-                $this->setCookie(new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie($cookie));
+                $this->setCookie(new \PNO\Geocoder\Vendor\GuzzleHttp\Cookie\SetCookie($cookie));
             }
         } elseif (\strlen($data)) {
             throw new \RuntimeException("Invalid cookie data");

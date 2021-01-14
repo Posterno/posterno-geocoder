@@ -1,11 +1,11 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp;
+namespace PNO\Geocoder\Vendor\GuzzleHttp;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlHandler;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlMultiHandler;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\Proxy;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\StreamHandler;
+use PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlHandler;
+use PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlMultiHandler;
+use PNO\Geocoder\Vendor\GuzzleHttp\Handler\Proxy;
+use PNO\Geocoder\Vendor\GuzzleHttp\Handler\StreamHandler;
 /**
  * Expands a URI template
  *
@@ -23,7 +23,7 @@ function uri_template($template, array $variables)
     }
     static $uriTemplate;
     if (!$uriTemplate) {
-        $uriTemplate = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\UriTemplate();
+        $uriTemplate = new \PNO\Geocoder\Vendor\GuzzleHttp\UriTemplate();
     }
     return $uriTemplate->expand($template, $variables);
 }
@@ -93,14 +93,14 @@ function choose_handler()
 {
     $handler = null;
     if (\function_exists('curl_multi_exec') && \function_exists('curl_exec')) {
-        $handler = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\Proxy::wrapSync(new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlMultiHandler(), new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlHandler());
+        $handler = \PNO\Geocoder\Vendor\GuzzleHttp\Handler\Proxy::wrapSync(new \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlMultiHandler(), new \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlHandler());
     } elseif (\function_exists('curl_exec')) {
-        $handler = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlHandler();
+        $handler = new \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlHandler();
     } elseif (\function_exists('curl_multi_exec')) {
-        $handler = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlMultiHandler();
+        $handler = new \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlMultiHandler();
     }
     if (\ini_get('allow_url_fopen')) {
-        $handler = $handler ? \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\Proxy::wrapStreaming($handler, new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\StreamHandler()) : new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\StreamHandler();
+        $handler = $handler ? \PNO\Geocoder\Vendor\GuzzleHttp\Handler\Proxy::wrapStreaming($handler, new \PNO\Geocoder\Vendor\GuzzleHttp\Handler\StreamHandler()) : new \PNO\Geocoder\Vendor\GuzzleHttp\Handler\StreamHandler();
     } elseif (!$handler) {
         throw new \RuntimeException('GuzzleHttp requires cURL, the ' . 'allow_url_fopen ini setting, or a custom HTTP handler.');
     }
@@ -115,7 +115,7 @@ function default_user_agent()
 {
     static $defaultAgent = '';
     if (!$defaultAgent) {
-        $defaultAgent = 'GuzzleHttp/' . \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Client::VERSION;
+        $defaultAgent = 'GuzzleHttp/' . \PNO\Geocoder\Vendor\GuzzleHttp\Client::VERSION;
         if (\extension_loaded('curl') && \function_exists('curl_version')) {
             $defaultAgent .= ' curl/' . \curl_version()['version'];
         }
@@ -269,7 +269,7 @@ function json_decode($json, $assoc = \false, $depth = 512, $options = 0)
 {
     $data = \json_decode($json, $assoc, $depth, $options);
     if (\JSON_ERROR_NONE !== \json_last_error()) {
-        throw new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\InvalidArgumentException('json_decode error: ' . \json_last_error_msg());
+        throw new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\InvalidArgumentException('json_decode error: ' . \json_last_error_msg());
     }
     return $data;
 }
@@ -288,7 +288,7 @@ function json_encode($value, $options = 0, $depth = 512)
 {
     $json = \json_encode($value, $options, $depth);
     if (\JSON_ERROR_NONE !== \json_last_error()) {
-        throw new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\InvalidArgumentException('json_encode error: ' . \json_last_error_msg());
+        throw new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\InvalidArgumentException('json_encode error: ' . \json_last_error_msg());
     }
     return $json;
 }

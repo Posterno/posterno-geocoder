@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 final class Utils
 {
@@ -21,13 +21,13 @@ final class Utils
      *
      * @return TaskQueueInterface
      */
-    public static function queue(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\TaskQueueInterface $assign = null)
+    public static function queue(\PNO\Geocoder\Vendor\GuzzleHttp\Promise\TaskQueueInterface $assign = null)
     {
         static $queue;
         if ($assign) {
             $queue = $assign;
         } elseif (!$queue) {
-            $queue = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\TaskQueue();
+            $queue = new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\TaskQueue();
         }
         return $queue;
     }
@@ -42,7 +42,7 @@ final class Utils
     public static function task(callable $task)
     {
         $queue = self::queue();
-        $promise = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise([$queue, 'run']);
+        $promise = new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise([$queue, 'run']);
         $queue->add(function () use($task, $promise) {
             try {
                 $promise->resolve($task());
@@ -68,16 +68,16 @@ final class Utils
      *
      * @return array
      */
-    public static function inspect(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
+    public static function inspect(\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $promise)
     {
         try {
-            return ['state' => \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::FULFILLED, 'value' => $promise->wait()];
-        } catch (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectionException $e) {
-            return ['state' => \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED, 'reason' => $e->getReason()];
+            return ['state' => \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::FULFILLED, 'value' => $promise->wait()];
+        } catch (\PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectionException $e) {
+            return ['state' => \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED, 'reason' => $e->getReason()];
         } catch (\Throwable $e) {
-            return ['state' => \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED, 'reason' => $e];
+            return ['state' => \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED, 'reason' => $e];
         } catch (\Exception $e) {
-            return ['state' => \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED, 'reason' => $e];
+            return ['state' => \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED, 'reason' => $e];
         }
     }
     /**
@@ -138,9 +138,9 @@ final class Utils
     public static function all($promises, $recursive = \false)
     {
         $results = [];
-        $promise = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Each::of($promises, function ($value, $idx) use(&$results) {
+        $promise = \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Each::of($promises, function ($value, $idx) use(&$results) {
             $results[$idx] = $value;
-        }, function ($reason, $idx, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise $aggregate) {
+        }, function ($reason, $idx, \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise $aggregate) {
             $aggregate->reject($reason);
         })->then(function () use(&$results) {
             \ksort($results);
@@ -149,7 +149,7 @@ final class Utils
         if (\true === $recursive) {
             $promise = $promise->then(function ($results) use($recursive, &$promises) {
                 foreach ($promises as $promise) {
-                    if (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::pending($promise)) {
+                    if (\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::pending($promise)) {
                         return self::all($promises, $recursive);
                     }
                 }
@@ -178,8 +178,8 @@ final class Utils
     {
         $results = [];
         $rejections = [];
-        return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Each::of($promises, function ($value, $idx, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $p) use(&$results, $count) {
-            if (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::settled($p)) {
+        return \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Each::of($promises, function ($value, $idx, \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface $p) use(&$results, $count) {
+            if (\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::settled($p)) {
                 return;
             }
             $results[$idx] = $value;
@@ -190,7 +190,7 @@ final class Utils
             $rejections[] = $reason;
         })->then(function () use(&$results, &$rejections, $count) {
             if (\count($results) !== $count) {
-                throw new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\AggregateException('Not enough promises to fulfill count', $rejections);
+                throw new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\AggregateException('Not enough promises to fulfill count', $rejections);
             }
             \ksort($results);
             return \array_values($results);
@@ -225,10 +225,10 @@ final class Utils
     public static function settle($promises)
     {
         $results = [];
-        return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Each::of($promises, function ($value, $idx) use(&$results) {
-            $results[$idx] = ['state' => \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::FULFILLED, 'value' => $value];
+        return \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Each::of($promises, function ($value, $idx) use(&$results) {
+            $results[$idx] = ['state' => \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::FULFILLED, 'value' => $value];
         }, function ($reason, $idx) use(&$results) {
-            $results[$idx] = ['state' => \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED, 'reason' => $reason];
+            $results[$idx] = ['state' => \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface::REJECTED, 'reason' => $reason];
         })->then(function () use(&$results) {
             \ksort($results);
             return $results;

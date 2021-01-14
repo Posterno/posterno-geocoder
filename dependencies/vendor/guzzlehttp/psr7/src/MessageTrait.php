@@ -1,8 +1,8 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Trait implementing functionality common to requests and responses.
  */
@@ -92,11 +92,11 @@ trait MessageTrait
     public function getBody()
     {
         if (!$this->stream) {
-            $this->stream = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor('');
+            $this->stream = \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor('');
         }
         return $this->stream;
     }
-    public function withBody(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $body)
+    public function withBody(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $body)
     {
         if ($body === $this->stream) {
             return $this;

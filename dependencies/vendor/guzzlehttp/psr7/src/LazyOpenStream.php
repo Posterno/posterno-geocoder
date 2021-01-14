@@ -1,13 +1,13 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Lazily reads or writes to a file that is opened only after an IO operation
  * take place on the stream.
  */
-class LazyOpenStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
+class LazyOpenStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
 {
     use StreamDecoratorTrait;
     /** @var string File to open */
@@ -30,6 +30,6 @@ class LazyOpenStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Htt
      */
     protected function createStream()
     {
-        return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::tryFopen($this->filename, $this->mode));
+        return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor(\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::tryFopen($this->filename, $this->mode));
     }
 }

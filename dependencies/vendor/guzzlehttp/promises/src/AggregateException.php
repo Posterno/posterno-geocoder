@@ -1,11 +1,11 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 /**
  * Exception thrown when too many errors occur in the some() or any() methods.
  */
-class AggregateException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectionException
+class AggregateException extends \PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectionException
 {
     public function __construct($msg, array $reasons)
     {

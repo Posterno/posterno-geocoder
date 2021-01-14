@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp;
+namespace PNO\Geocoder\Vendor\GuzzleHttp;
 
 /**
  * Expands URI templates. Userland implementation of PECL uri_template.

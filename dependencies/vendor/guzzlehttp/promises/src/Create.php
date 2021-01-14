@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 final class Create
 {
@@ -13,18 +13,18 @@ final class Create
      */
     public static function promiseFor($value)
     {
-        if ($value instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface) {
+        if ($value instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface) {
             return $value;
         }
         // Return a Guzzle promise that shadows the given promise.
         if (\is_object($value) && \method_exists($value, 'then')) {
             $wfn = \method_exists($value, 'wait') ? [$value, 'wait'] : null;
             $cfn = \method_exists($value, 'cancel') ? [$value, 'cancel'] : null;
-            $promise = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise($wfn, $cfn);
+            $promise = new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise($wfn, $cfn);
             $value->then([$promise, 'resolve'], [$promise, 'reject']);
             return $promise;
         }
-        return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise($value);
+        return new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\FulfilledPromise($value);
     }
     /**
      * Creates a rejected promise for a reason if the reason is not a promise.
@@ -36,10 +36,10 @@ final class Create
      */
     public static function rejectionFor($reason)
     {
-        if ($reason instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface) {
+        if ($reason instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface) {
             return $reason;
         }
-        return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectedPromise($reason);
+        return new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectedPromise($reason);
     }
     /**
      * Create an exception for a rejected promise value.
@@ -53,7 +53,7 @@ final class Create
         if ($reason instanceof \Exception || $reason instanceof \Throwable) {
             return $reason;
         }
-        return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectionException($reason);
+        return new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectionException($reason);
     }
     /**
      * Returns an iterator for the given value.

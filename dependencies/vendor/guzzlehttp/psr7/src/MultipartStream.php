@@ -1,13 +1,13 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
 /**
  * Stream that when read returns bytes for a streaming multipart or
  * multipart/form-data stream.
  */
-class MultipartStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
+class MultipartStream implements \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface
 {
     use StreamDecoratorTrait;
     private $boundary;
@@ -57,22 +57,22 @@ class MultipartStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Ht
      */
     protected function createStream(array $elements)
     {
-        $stream = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\AppendStream();
+        $stream = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\AppendStream();
         foreach ($elements as $element) {
             $this->addElement($stream, $element);
         }
         // Add the trailing boundary with CRLF
-        $stream->addStream(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor("--{$this->boundary}--\r\n"));
+        $stream->addStream(\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor("--{$this->boundary}--\r\n"));
         return $stream;
     }
-    private function addElement(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\AppendStream $stream, array $element)
+    private function addElement(\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\AppendStream $stream, array $element)
     {
         foreach (['contents', 'name'] as $key) {
             if (!\array_key_exists($key, $element)) {
                 throw new \InvalidArgumentException("A '{$key}' key is required");
             }
         }
-        $element['contents'] = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor($element['contents']);
+        $element['contents'] = \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor($element['contents']);
         if (empty($element['filename'])) {
             $uri = $element['contents']->getMetadata('uri');
             if (\substr($uri, 0, 6) !== 'php://') {
@@ -80,14 +80,14 @@ class MultipartStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Ht
             }
         }
         list($body, $headers) = $this->createElement($element['name'], $element['contents'], isset($element['filename']) ? $element['filename'] : null, isset($element['headers']) ? $element['headers'] : []);
-        $stream->addStream(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor($this->getHeaders($headers)));
+        $stream->addStream(\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor($this->getHeaders($headers)));
         $stream->addStream($body);
-        $stream->addStream(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor("\r\n"));
+        $stream->addStream(\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor("\r\n"));
     }
     /**
      * @return array
      */
-    private function createElement($name, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $filename, array $headers)
+    private function createElement($name, \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $filename, array $headers)
     {
         // Set a default content-disposition header if one was no provided
         $disposition = $this->getHeader($headers, 'content-disposition');
@@ -104,7 +104,7 @@ class MultipartStream implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Ht
         // Set a default Content-Type if one was not supplied
         $type = $this->getHeader($headers, 'content-type');
         if (!$type && ($filename === '0' || $filename)) {
-            if ($type = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\MimeType::fromFilename($filename)) {
+            if ($type = \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\MimeType::fromFilename($filename)) {
                 $headers['Content-Type'] = $type;
             }
         }

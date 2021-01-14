@@ -1,9 +1,9 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Handler;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
 /**
  * HTTP handler that uses cURL easy handles as a transport layer.
  *
@@ -24,9 +24,9 @@ class CurlHandler
      */
     public function __construct(array $options = [])
     {
-        $this->factory = isset($options['handle_factory']) ? $options['handle_factory'] : new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory(3);
+        $this->factory = isset($options['handle_factory']) ? $options['handle_factory'] : new \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory(3);
     }
-    public function __invoke(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
+    public function __invoke(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
     {
         if (isset($options['delay'])) {
             \usleep($options['delay'] * 1000);
@@ -34,6 +34,6 @@ class CurlHandler
         $easy = $this->factory->create($request, $options);
         \curl_exec($easy->handle);
         $easy->errno = \curl_errno($easy->handle);
-        return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory::finish($this, $easy, $this->factory);
+        return \PNO\Geocoder\Vendor\GuzzleHttp\Handler\CurlFactory::finish($this, $easy, $this->factory);
     }
 }

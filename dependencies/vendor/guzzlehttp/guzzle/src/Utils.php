@@ -1,10 +1,10 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp;
+namespace PNO\Geocoder\Vendor\GuzzleHttp;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\InvalidArgumentException;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Symfony\Polyfill\Intl\Idn\Idn;
+use PNO\Geocoder\Vendor\GuzzleHttp\Exception\InvalidArgumentException;
+use PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
+use PNO\Geocoder\Vendor\Symfony\Polyfill\Intl\Idn\Idn;
 final class Utils
 {
     /**
@@ -27,7 +27,7 @@ final class Utils
      *
      * @internal
      */
-    public static function idnUriConvert(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, $options = 0)
+    public static function idnUriConvert(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, $options = 0)
     {
         if ($uri->getHost()) {
             $asciiHost = self::idnToAsci($uri->getHost(), $options, $info);
@@ -46,7 +46,7 @@ final class Utils
                 if ($errors) {
                     $errorMessage .= ' (errors: ' . \implode(', ', $errors) . ')';
                 }
-                throw new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\InvalidArgumentException($errorMessage);
+                throw new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\InvalidArgumentException($errorMessage);
             } else {
                 if ($uri->getHost() !== $asciiHost) {
                     // Replace URI only if the ASCII version is different
@@ -74,8 +74,8 @@ final class Utils
         /*
          * The Idn class is marked as @internal. Verify that class and method exists.
          */
-        if (\method_exists(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Symfony\Polyfill\Intl\Idn\Idn::class, 'idn_to_ascii')) {
-            return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Symfony\Polyfill\Intl\Idn\Idn::idn_to_ascii($domain, $options, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Symfony\Polyfill\Intl\Idn\Idn::INTL_IDNA_VARIANT_UTS46, $info);
+        if (\method_exists(\PNO\Geocoder\Vendor\Symfony\Polyfill\Intl\Idn\Idn::class, 'idn_to_ascii')) {
+            return \PNO\Geocoder\Vendor\Symfony\Polyfill\Intl\Idn\Idn::idn_to_ascii($domain, $options, \PNO\Geocoder\Vendor\Symfony\Polyfill\Intl\Idn\Idn::INTL_IDNA_VARIANT_UTS46, $info);
         }
         throw new \RuntimeException('ext-intl or symfony/polyfill-intl-idn not loaded or too old');
     }

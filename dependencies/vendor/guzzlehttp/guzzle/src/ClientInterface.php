@@ -1,12 +1,12 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp;
+namespace PNO\Geocoder\Vendor\GuzzleHttp;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\GuzzleException;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
+use PNO\Geocoder\Vendor\GuzzleHttp\Exception\GuzzleException;
+use PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
 /**
  * Client interface for sending HTTP requests.
  */
@@ -26,7 +26,7 @@ interface ClientInterface
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function send(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options = []);
+    public function send(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options = []);
     /**
      * Asynchronously send an HTTP request.
      *
@@ -36,7 +36,7 @@ interface ClientInterface
      *
      * @return PromiseInterface
      */
-    public function sendAsync(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options = []);
+    public function sendAsync(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options = []);
     /**
      * Create and send an HTTP request.
      *

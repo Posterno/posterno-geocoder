@@ -1,15 +1,15 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Exception;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
+use PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
 /**
  * HTTP Request exception
  */
-class RequestException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\TransferException
+class RequestException extends \PNO\Geocoder\Vendor\GuzzleHttp\Exception\TransferException
 {
     /** @var RequestInterface */
     private $request;
@@ -17,10 +17,10 @@ class RequestException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHt
     private $response;
     /** @var array */
     private $handlerContext;
-    public function __construct($message, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response = null, \Exception $previous = null, array $handlerContext = [])
+    public function __construct($message, \PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response = null, \Exception $previous = null, array $handlerContext = [])
     {
         // Set the code of the exception if the response is set and not future.
-        $code = $response && !$response instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface ? $response->getStatusCode() : 0;
+        $code = $response && !$response instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface ? $response->getStatusCode() : 0;
         parent::__construct($message, $code, $previous);
         $this->request = $request;
         $this->response = $response;
@@ -34,9 +34,9 @@ class RequestException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHt
      *
      * @return RequestException
      */
-    public static function wrapException(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \Exception $e)
+    public static function wrapException(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \Exception $e)
     {
-        return $e instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException ? $e : new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException($e->getMessage(), $request, null, $e);
+        return $e instanceof \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException ? $e : new \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException($e->getMessage(), $request, null, $e);
     }
     /**
      * Factory method to create a new exception with a normalized error message
@@ -48,7 +48,7 @@ class RequestException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHt
      *
      * @return self
      */
-    public static function create(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response = null, \Exception $previous = null, array $ctx = [])
+    public static function create(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response = null, \Exception $previous = null, array $ctx = [])
     {
         if (!$response) {
             return new self('Error completing request', $request, null, $previous, $ctx);
@@ -56,10 +56,10 @@ class RequestException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHt
         $level = (int) \floor($response->getStatusCode() / 100);
         if ($level === 4) {
             $label = 'Client error';
-            $className = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\ClientException::class;
+            $className = \PNO\Geocoder\Vendor\GuzzleHttp\Exception\ClientException::class;
         } elseif ($level === 5) {
             $label = 'Server error';
-            $className = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\ServerException::class;
+            $className = \PNO\Geocoder\Vendor\GuzzleHttp\Exception\ServerException::class;
         } else {
             $label = 'Unsuccessful request';
             $className = __CLASS__;
@@ -84,7 +84,7 @@ class RequestException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHt
      *
      * @return string|null
      */
-    public static function getResponseBodySummary(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response)
+    public static function getResponseBodySummary(\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response)
     {
         return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\get_message_body_summary($response);
     }
@@ -95,7 +95,7 @@ class RequestException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHt
      *
      * @return UriInterface
      */
-    private static function obfuscateUri(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
+    private static function obfuscateUri(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri)
     {
         $userInfo = $uri->getUserInfo();
         if (\false !== ($pos = \strpos($userInfo, ':'))) {

@@ -1,7 +1,7 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Exception;
 
-class TooManyRedirectsException extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException
+class TooManyRedirectsException extends \PNO\Geocoder\Vendor\GuzzleHttp\Exception\RequestException
 {
 }

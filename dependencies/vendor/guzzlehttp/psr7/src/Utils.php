@@ -1,11 +1,11 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ServerRequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\ServerRequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
 final class Utils
 {
     /**
@@ -39,7 +39,7 @@ final class Utils
      *
      * @throws \RuntimeException on error.
      */
-    public static function copyToStream(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $source, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $dest, $maxLen = -1)
+    public static function copyToStream(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $source, \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $dest, $maxLen = -1)
     {
         $bufferSize = 8192;
         if ($maxLen === -1) {
@@ -72,7 +72,7 @@ final class Utils
      *
      * @throws \RuntimeException on error.
      */
-    public static function copyToString(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $maxLen = -1)
+    public static function copyToString(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $maxLen = -1)
     {
         $buffer = '';
         if ($maxLen === -1) {
@@ -112,7 +112,7 @@ final class Utils
      *
      * @throws \RuntimeException on error.
      */
-    public static function hash(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $algo, $rawOutput = \false)
+    public static function hash(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $algo, $rawOutput = \false)
     {
         $pos = $stream->tell();
         if ($pos > 0) {
@@ -146,7 +146,7 @@ final class Utils
      *
      * @return RequestInterface
      */
-    public static function modifyRequest(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $changes)
+    public static function modifyRequest(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $changes)
     {
         if (!$changes) {
             return $request;
@@ -178,10 +178,10 @@ final class Utils
         if (isset($changes['query'])) {
             $uri = $uri->withQuery($changes['query']);
         }
-        if ($request instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ServerRequestInterface) {
-            return (new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\ServerRequest(isset($changes['method']) ? $changes['method'] : $request->getMethod(), $uri, $headers, isset($changes['body']) ? $changes['body'] : $request->getBody(), isset($changes['version']) ? $changes['version'] : $request->getProtocolVersion(), $request->getServerParams()))->withParsedBody($request->getParsedBody())->withQueryParams($request->getQueryParams())->withCookieParams($request->getCookieParams())->withUploadedFiles($request->getUploadedFiles());
+        if ($request instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\ServerRequestInterface) {
+            return (new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\ServerRequest(isset($changes['method']) ? $changes['method'] : $request->getMethod(), $uri, $headers, isset($changes['body']) ? $changes['body'] : $request->getBody(), isset($changes['version']) ? $changes['version'] : $request->getProtocolVersion(), $request->getServerParams()))->withParsedBody($request->getParsedBody())->withQueryParams($request->getQueryParams())->withCookieParams($request->getCookieParams())->withUploadedFiles($request->getUploadedFiles());
         }
-        return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request(isset($changes['method']) ? $changes['method'] : $request->getMethod(), $uri, $headers, isset($changes['body']) ? $changes['body'] : $request->getBody(), isset($changes['version']) ? $changes['version'] : $request->getProtocolVersion());
+        return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Request(isset($changes['method']) ? $changes['method'] : $request->getMethod(), $uri, $headers, isset($changes['body']) ? $changes['body'] : $request->getBody(), isset($changes['version']) ? $changes['version'] : $request->getProtocolVersion());
     }
     /**
      * Read a line from the stream up to the maximum allowed buffer length.
@@ -191,7 +191,7 @@ final class Utils
      *
      * @return string
      */
-    public static function readLine(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $maxLength = null)
+    public static function readLine(\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface $stream, $maxLength = null)
     {
         $buffer = '';
         $size = 0;
@@ -252,16 +252,16 @@ final class Utils
                 \fwrite($stream, $resource);
                 \fseek($stream, 0);
             }
-            return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($stream, $options);
+            return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($stream, $options);
         }
         switch (\gettype($resource)) {
             case 'resource':
-                return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($resource, $options);
+                return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream($resource, $options);
             case 'object':
-                if ($resource instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface) {
+                if ($resource instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface) {
                     return $resource;
                 } elseif ($resource instanceof \Iterator) {
-                    return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\PumpStream(function () use($resource) {
+                    return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\PumpStream(function () use($resource) {
                         if (!$resource->valid()) {
                             return \false;
                         }
@@ -270,14 +270,14 @@ final class Utils
                         return $result;
                     }, $options);
                 } elseif (\method_exists($resource, '__toString')) {
-                    return \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor((string) $resource, $options);
+                    return \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor((string) $resource, $options);
                 }
                 break;
             case 'NULL':
-                return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream(\fopen('php://temp', 'r+'), $options);
+                return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Stream(\fopen('php://temp', 'r+'), $options);
         }
         if (\is_callable($resource)) {
-            return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\PumpStream($resource, $options);
+            return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\PumpStream($resource, $options);
         }
         throw new \InvalidArgumentException('Invalid resource type: ' . \gettype($resource));
     }
@@ -323,11 +323,11 @@ final class Utils
      */
     public static function uriFor($uri)
     {
-        if ($uri instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface) {
+        if ($uri instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface) {
             return $uri;
         }
         if (\is_string($uri)) {
-            return new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Uri($uri);
+            return new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Uri($uri);
         }
         throw new \InvalidArgumentException('URI must be a string or UriInterface');
     }

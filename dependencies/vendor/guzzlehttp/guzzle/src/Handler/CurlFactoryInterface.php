@@ -1,8 +1,8 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Handler;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
 interface CurlFactoryInterface
 {
     /**
@@ -14,7 +14,7 @@ interface CurlFactoryInterface
      * @return EasyHandle
      * @throws \RuntimeException when an option cannot be applied
      */
-    public function create(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options);
+    public function create(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options);
     /**
      * Release an easy handle, allowing it to be reused or closed.
      *
@@ -22,5 +22,5 @@ interface CurlFactoryInterface
      *
      * @param EasyHandle $easy
      */
-    public function release(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy);
+    public function release(\PNO\Geocoder\Vendor\GuzzleHttp\Handler\EasyHandle $easy);
 }

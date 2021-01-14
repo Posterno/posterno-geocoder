@@ -1,15 +1,15 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
 
 use InvalidArgumentException;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\StreamInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface;
 /**
  * PSR-7 request implementation.
  */
-class Request implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface
+class Request implements \PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface
 {
     use MessageTrait;
     /** @var string */
@@ -28,8 +28,8 @@ class Request implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Messa
     public function __construct($method, $uri, array $headers = [], $body = null, $version = '1.1')
     {
         $this->assertMethod($method);
-        if (!$uri instanceof \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface) {
-            $uri = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Uri($uri);
+        if (!$uri instanceof \PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface) {
+            $uri = new \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Uri($uri);
         }
         $this->method = \strtoupper($method);
         $this->uri = $uri;
@@ -39,7 +39,7 @@ class Request implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Messa
             $this->updateHostFromUri();
         }
         if ($body !== '' && $body !== null) {
-            $this->stream = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor($body);
+            $this->stream = \PNO\Geocoder\Vendor\GuzzleHttp\Psr7\Utils::streamFor($body);
         }
     }
     public function getRequestTarget()
@@ -80,7 +80,7 @@ class Request implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Messa
     {
         return $this->uri;
     }
-    public function withUri(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, $preserveHost = \false)
+    public function withUri(\PNO\Geocoder\Vendor\Psr\Http\Message\UriInterface $uri, $preserveHost = \false)
     {
         if ($uri === $this->uri) {
             return $this;

@@ -1,12 +1,12 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 /**
  * Represents a promise that iterates over many promises and invokes
  * side-effect functions in the process.
  */
-class EachPromise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface
+class EachPromise implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromisorInterface
 {
     private $pending = [];
     /** @var \Iterator|null */
@@ -44,7 +44,7 @@ class EachPromise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp
      */
     public function __construct($iterable, array $config = [])
     {
-        $this->iterable = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::iterFor($iterable);
+        $this->iterable = \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::iterFor($iterable);
         if (isset($config['concurrency'])) {
             $this->concurrency = $config['concurrency'];
         }
@@ -90,14 +90,14 @@ class EachPromise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp
     private function createPromise()
     {
         $this->mutex = \false;
-        $this->aggregate = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise(function () {
+        $this->aggregate = new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise(function () {
             \reset($this->pending);
             // Consume a potentially fluctuating list of promises while
             // ensuring that indexes are maintained (precluding array_shift).
             while ($promise = \current($this->pending)) {
                 \next($this->pending);
                 $promise->wait();
-                if (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::settled($this->aggregate)) {
+                if (\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::settled($this->aggregate)) {
                     return;
                 }
             }
@@ -138,7 +138,7 @@ class EachPromise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp
         if (!$this->iterable || !$this->iterable->valid()) {
             return \false;
         }
-        $promise = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::promiseFor($this->iterable->current());
+        $promise = \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::promiseFor($this->iterable->current());
         $key = $this->iterable->key();
         // Iterable keys may not be unique, so we add the promises at the end
         // of the pending array and retrieve the array index being used
@@ -183,7 +183,7 @@ class EachPromise implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp
     private function step($idx)
     {
         // If the promise was already resolved, then ignore this step.
-        if (\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::settled($this->aggregate)) {
+        if (\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Is::settled($this->aggregate)) {
             return;
         }
         unset($this->pending[$idx]);

@@ -1,9 +1,9 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps;
+namespace PNO\Geocoder\Vendor\yidas\googleMaps;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Service;
+use PNO\Geocoder\Vendor\yidas\googleMaps\Client;
 /**
  * Directions Service
  * 
@@ -11,7 +11,7 @@ use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client;
  * @since   1.0.0
  * @see https://developers.google.com/maps/documentation/geolocation/
  */
-class Geolocation extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Service
+class Geolocation extends \PNO\Geocoder\Vendor\yidas\googleMaps\Service
 {
     /**
      * Replace all
@@ -24,7 +24,7 @@ class Geolocation extends \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleM
      * @param array Body parameters
      * @return array Result
      */
-    public static function geolocate(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $bodyParams = [])
+    public static function geolocate(\PNO\Geocoder\Vendor\yidas\googleMaps\Client $client, $bodyParams = [])
     {
         // Google API request body format
         $body = \json_encode($bodyParams);

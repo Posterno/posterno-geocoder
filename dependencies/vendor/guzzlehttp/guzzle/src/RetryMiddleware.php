@@ -1,12 +1,12 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp;
+namespace PNO\Geocoder\Vendor\GuzzleHttp;
 
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectedPromise;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
-use PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
+use PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface;
+use PNO\Geocoder\Vendor\GuzzleHttp\Promise\RejectedPromise;
+use PNO\Geocoder\Vendor\GuzzleHttp\Psr7;
+use PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface;
+use PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface;
 /**
  * Middleware that retries requests based on the boolean result of
  * invoking the provided "decider" function.
@@ -52,7 +52,7 @@ class RetryMiddleware
      *
      * @return PromiseInterface
      */
-    public function __invoke(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
+    public function __invoke(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options)
     {
         if (!isset($options['retries'])) {
             $options['retries'] = 0;
@@ -65,7 +65,7 @@ class RetryMiddleware
      *
      * @return mixed
      */
-    private function onFulfilled(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $req, array $options)
+    private function onFulfilled(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $req, array $options)
     {
         return function ($value) use($req, $options) {
             if (!\call_user_func($this->decider, $options['retries'], $req, $value, null)) {
@@ -79,7 +79,7 @@ class RetryMiddleware
      *
      * @return callable
      */
-    private function onRejected(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $req, array $options)
+    private function onRejected(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $req, array $options)
     {
         return function ($reason) use($req, $options) {
             if (!\call_user_func($this->decider, $options['retries'], $req, null, $reason)) {
@@ -91,7 +91,7 @@ class RetryMiddleware
     /**
      * @return self
      */
-    private function doRetry(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options, \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response = null)
+    private function doRetry(\PNO\Geocoder\Vendor\Psr\Http\Message\RequestInterface $request, array $options, \PNO\Geocoder\Vendor\Psr\Http\Message\ResponseInterface $response = null)
     {
         $options['delay'] = \call_user_func($this->delay, ++$options['retries'], $response);
         return $this($request, $options);

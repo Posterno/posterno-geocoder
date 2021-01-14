@@ -1,6 +1,6 @@
 <?php
 
-namespace PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+namespace PNO\Geocoder\Vendor\GuzzleHttp\Promise;
 
 use Exception;
 use Generator;
@@ -16,7 +16,7 @@ use Throwable;
  * This can lead to less verbose code when doing lots of sequential async calls
  * with minimal processing in between.
  *
- *     use PNO\Geocoder\Vendor\GuzzleHttp\Promise;
+ *     use GuzzleHttp\Promise;
  *
  *     function createPromise($value) {
  *         return new Promise\FulfilledPromise($value);
@@ -41,7 +41,7 @@ use Throwable;
  *
  * @link https://github.com/petkaantonov/bluebird/blob/master/API.md#generators inspiration
  */
-final class Coroutine implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface
+final class Coroutine implements \PNO\Geocoder\Vendor\GuzzleHttp\Promise\PromiseInterface
 {
     /**
      * @var PromiseInterface|null
@@ -58,7 +58,7 @@ final class Coroutine implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Guzzle
     public function __construct(callable $generatorFn)
     {
         $this->generator = $generatorFn();
-        $this->result = new \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise(function () {
+        $this->result = new \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Promise(function () {
             while (isset($this->currentPromise)) {
                 $this->currentPromise->wait();
             }
@@ -111,7 +111,7 @@ final class Coroutine implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Guzzle
     }
     private function nextCoroutine($yielded)
     {
-        $this->currentPromise = \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::promiseFor($yielded)->then([$this, '_handleSuccess'], [$this, '_handleFailure']);
+        $this->currentPromise = \PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::promiseFor($yielded)->then([$this, '_handleSuccess'], [$this, '_handleFailure']);
     }
     /**
      * @internal
@@ -139,7 +139,7 @@ final class Coroutine implements \PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\Guzzle
     {
         unset($this->currentPromise);
         try {
-            $nextYield = $this->generator->throw(\PNO\Geocoder\Vendor\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::exceptionFor($reason));
+            $nextYield = $this->generator->throw(\PNO\Geocoder\Vendor\GuzzleHttp\Promise\Create::exceptionFor($reason));
             // The throw was caught, so keep iterating on the coroutine
             $this->nextCoroutine($nextYield);
         } catch (\Exception $exception) {
